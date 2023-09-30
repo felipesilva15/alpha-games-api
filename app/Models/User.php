@@ -12,34 +12,35 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+    protected $table = 'USUARIO';
+    protected $primaryKey = 'USUARIO_ID';
+    public $timestamps = false;
+
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'USUARIO_NOME',
+        'USUARIO_EMAIL',
+        'USUARIO_SENHA',
+        'USUARIO_CPF'
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
-        'password',
-        'remember_token',
+        'USUARIO_SENHA'
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
-    ];
+    public function Orders() {
+        return $this->hasMany('App\Models\Order', 'USUARIO_ID', 'USUARIO_ID');
+    }
+
+    public function CartItems() {
+        return $this->hasMany('App\Models\CartItem', 'USUARIO_ID', 'USUARIO_ID');
+    }
+
+    public function address() {
+        return $this->hasOne(Address::class, 'USUARIO_ID', 'USUARIO_ID');
+    }
+
+    //Método para retornar um único objeto do endereço ativo do usuário
+    public function activeAddress() {
+        return $this->address()->where('ENDERECO_APAGADO', 0)->first();
+    }
 }
