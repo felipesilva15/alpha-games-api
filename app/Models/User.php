@@ -27,6 +27,15 @@ class User extends Authenticatable
         'USUARIO_SENHA'
     ];
 
+    public static function rules(): Array {
+        return [
+            'USUARIO_NOME' => 'required|string',
+            'USUARIO_EMAIL' => 'required|string|unique:USUARIO,USUARIO_EMAIL|email',
+            'USUARIO_SENHA' => 'required|string|min:3',
+            'USUARIO_CPF' => 'required|string|unique:USUARIO,USUARIO_CPF|min:11'
+        ];
+    }
+
     public function Orders() {
         return $this->hasMany('App\Models\Order', 'USUARIO_ID', 'USUARIO_ID');
     }
