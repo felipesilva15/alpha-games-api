@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use App\Helpers\ApiError;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
@@ -30,8 +31,8 @@ class Handler extends ExceptionHandler
     }
 
     public function render($request, Throwable $e) {
-        if($e instanceof HttpException){
-            return response()->json(["message" => $e->getMessage()], $e->getStatusCode());
+        if ($e instanceof HttpException) {
+            return response()->json(new ApiError($e->getStatusCode(), $e->getMessage(), $request->path()), $e->getStatusCode());
         }
 
         return parent::render($request, $e);
