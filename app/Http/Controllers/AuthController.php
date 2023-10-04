@@ -33,7 +33,7 @@ class AuthController extends Controller
         ];
 
         if (!$token = JWTAuth::attempt($credentials)) {
-            return response()->json(new ApiError(401, 'Unauthorized.', $request->path()), 401);
+            return response()->json(new ApiError("CTRLAUTH001", 'Unauthorized.', $request->path()), 401);
         }
 
         return $this->respondWithToken($token);

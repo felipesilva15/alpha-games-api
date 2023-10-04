@@ -14,6 +14,6 @@ class Authenticate extends Middleware
      */
     protected function redirectTo(Request $request): ?string
     {
-        return null;
+        return $request->expectsJson() ? null : throw new UnauthorizedHttpException("message", "Invalid access token.");
     }
 }

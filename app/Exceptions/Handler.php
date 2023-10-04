@@ -32,7 +32,7 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $e) {
         if ($e instanceof HttpException) {
-            return response()->json(new ApiError($e->getStatusCode(), $e->getMessage(), $request->path()), $e->getStatusCode());
+            return response()->json(new ApiError("EXCPHAND001", $e->getMessage(), $request->path()), $e->getStatusCode());
         }
 
         return parent::render($request, $e);
