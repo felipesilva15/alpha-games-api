@@ -15,9 +15,9 @@ class ApiError
         $this->message = $message;
     }
 
-    public function getCode(): int 
+    public function getCode(): string 
     {
-        return (int) $this->code;
+        return (string) $this->code;
     }
 
     public function getEndpoint(): string 

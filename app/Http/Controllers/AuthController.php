@@ -34,7 +34,7 @@ class AuthController extends Controller
         ];
 
         if (!$token = JWTAuth::attempt($credentials)) {
-            $data = new ApiError(401, 'Credenciais inválidas.', $request->path());
+            $data = new ApiError("CTRLAUTH001", 'Credenciais inválidas.', $request->path());
 
             return response()->json($data->toArray(), 401);
         }
