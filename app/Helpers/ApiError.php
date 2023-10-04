@@ -29,4 +29,12 @@ class ApiError
     {
         return (string) $this->message;
     }
+
+    public function toArray(): array {
+        return [
+            "code" => $this->getCode(),
+            "endpoint" => $this->getEndpoint(),
+            "message" => $this->getMessage(),
+        ];
+    }
 }

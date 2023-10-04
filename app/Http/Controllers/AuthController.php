@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\MasterNotFoundHttpException;
 use App\Helpers\ApiError;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -33,7 +34,9 @@ class AuthController extends Controller
         ];
 
         if (!$token = JWTAuth::attempt($credentials)) {
-            return response()->json(new ApiError(401, 'Unauthorized.', $request->path()), 401);
+            $data = new ApiError(401, 'Credenciais inválidas.', $request->path());
+
+            return response()->json($data->toArray(), 401);
         }
 
         return $this->respondWithToken($token);
