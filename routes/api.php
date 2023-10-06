@@ -28,9 +28,11 @@ Route::post('refresh-token', [AuthController::class, 'refresh']);
 Route::get('me', [AuthController::class, 'me']);
 Route::post('logout', [AuthController::class, 'logout']);
 
+// User
+Route::post('user', [UserController::class, 'store']);
+
 Route::group(['middleware' => 'auth:api'], function () {
     // User
     Route::get('/user/{id}', [UserController::class, 'show']);
     Route::get('/user', [UserController::class, 'index']);
-    Route::post('/user', [UserController::class, 'store']);
 });

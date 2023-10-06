@@ -27,6 +27,11 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
+        $request->validate([
+            'USUARIO_EMAIL' => 'required|string|email',
+            'USUARIO_SENHA' => 'required|string',
+        ]);
+
         //$credentials = request(['USUARIO_EMAIL', 'USUARIO_SENHA']);
         $credentials = [
             'USUARIO_EMAIL' => $request->USUARIO_EMAIL, // Campo personalizado para o email
