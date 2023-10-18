@@ -12,15 +12,15 @@ class Product extends Model
     protected $table = "PRODUTO";
     protected $primaryKey = 'PRODUTO_ID';
 
-    public function ProductImages() {
+    public function produto_imagem() {
         return $this->hasMany('App\Models\ProductImage', 'PRODUTO_ID', 'PRODUTO_ID');
     }
 
-    public function Category() {
+    public function categoria() {
         return $this->belongsTo('App\Models\Category', 'CATEGORIA_ID', 'CATEGORIA_ID');
     }
 
-    public function ProductStock() {
+    public function produto_estoque() {
         return $this->hasOne('App\Models\ProductStock', 'PRODUTO_ID', 'PRODUTO_ID');
     }
 
