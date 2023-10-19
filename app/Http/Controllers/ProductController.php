@@ -56,18 +56,18 @@ class ProductController extends Controller
         // }
 
         $data = Product::where($conditions)
-                        ->with("categoria")
-                        ->with('produto_imagem')
-                        ->with('produto_estoque')
+                        ->with("category")
+                        ->with('images')
+                        ->withSum('stock as PRODUTO_QTD', 'produto_qtd')
                         ->get();
 
         return response()->json($data, 200);
     }
 
     public function show(int $id){
-        $data = Product::with("categoria")
-                        ->with('produto_imagem')
-                        ->with('produto_estoque')
+        $data = Product::with("category")
+                        ->with('images')
+                        ->withSum('stock as PRODUTO_QTD', 'produto_qtd') // Quantida
                         ->find($id);
 
         if (!$data) {

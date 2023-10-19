@@ -12,19 +12,19 @@ class Product extends Model
     protected $table = "PRODUTO";
     protected $primaryKey = 'PRODUTO_ID';
 
-    public function produto_imagem() {
+    public function images() {
         return $this->hasMany('App\Models\ProductImage', 'PRODUTO_ID', 'PRODUTO_ID');
     }
 
-    public function categoria() {
+    public function category() {
         return $this->belongsTo('App\Models\Category', 'CATEGORIA_ID', 'CATEGORIA_ID');
     }
 
-    public function produto_estoque() {
+    public function stock() {
         return $this->hasOne('App\Models\ProductStock', 'PRODUTO_ID', 'PRODUTO_ID');
     }
 
-    public function OrderItems() {
+    public function orderItems() {
         return $this->hasMany('App\Models\OrderItem', 'PRODUTO_ID', 'PRODUTO_ID');
     }
 
