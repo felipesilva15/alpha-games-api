@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Clients\ViacepClient;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
@@ -17,6 +18,13 @@ Route::post('user', [UserController::class, 'store']);
 // Products
 Route::get("product", [ProductController::class, 'index']);
 Route::get("product/{id}", [ProductController::class, 'show']);
+
+Route::get("cep/{cep}", function() {
+    $client = new ViacepClient();
+    $address = $client->getAddressByCep(request('cep'));
+
+    return response()->json($address->toArray(), 200);
+});
 
 Route::group(['middleware' => 'auth:api'], function () {
     // User
