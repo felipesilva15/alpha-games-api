@@ -6,11 +6,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-// Login
+// Auth
 Route::post('/login', [AuthController::class, 'login']);
-Route::post('/refresh-token', [AuthController::class, 'refresh']);
-Route::get('/me', [AuthController::class, 'me']);
-Route::post('/logout', [AuthController::class, 'logout']);
 
 // User
 Route::post('/user', [UserController::class, 'store']);
@@ -26,4 +23,9 @@ Route::group(['middleware' => 'auth:api'], function () {
     // User
     Route::get('/user/{id}', [UserController::class, 'show']);
     Route::get('/user', [UserController::class, 'index']);
+    Route::get('/me', [AuthController::class, 'me']);
+
+    // Auth
+    Route::post('/refresh-token', [AuthController::class, 'refresh']);
+    Route::post('/logout', [AuthController::class, 'logout']);
 });
