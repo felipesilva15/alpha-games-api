@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SearchCepController;
 use App\Http\Controllers\ProductController;
@@ -21,6 +22,7 @@ Route::get('/cep/{cep}', [SearchCepController::class, 'getAddressByCep']);
 
 Route::group(['middleware' => 'auth:api'], function () {
     // User
+    Route::get('/user/adresses', [UserController::class, 'adresses']);
     Route::get('/user/{id}', [UserController::class, 'show']);
     Route::get('/user', [UserController::class, 'index']);
     Route::get('/me', [AuthController::class, 'me']);
@@ -28,4 +30,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     // Auth
     Route::post('/refresh-token', [AuthController::class, 'refresh']);
     Route::post('/logout', [AuthController::class, 'logout']);
+
+    // Adresses
+    Route::apiResource('address', AddressController::class);
 });
