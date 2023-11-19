@@ -21,7 +21,6 @@ class Address extends Model
         'ENDERECO_COMPLEMENTO',
         'ENDERECO_CIDADE',
         'ENDERECO_ESTADO',
-        'ENDERECO_APAGADO',
         'USUARIO_ID',
     ];
 
@@ -41,4 +40,16 @@ class Address extends Model
 
         return $formattedAddress;
     }
+
+    public static function rules(): array {
+        return [
+            'ENDERECO_CEP' => 'required|string|max:8',
+            'ENDERECO_NOME' => 'required|string',
+            'ENDERECO_LOGRADOURO' => 'required|string',
+            'ENDERECO_NUMERO' => 'required|string',
+            'ENDERECO_COMPLEMENTO' => 'nullable|string',
+            'ENDERECO_CIDADE' => 'required|string',
+            'ENDERECO_ESTADO' => 'required|string'
+        ];
+    } 
 }
