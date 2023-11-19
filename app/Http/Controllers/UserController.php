@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exceptions\MasterNotFoundHttpException;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -26,7 +27,7 @@ class UserController extends Controller
         return response()->json($data, 201);
     }
 
-    public function show(int $id) {
+    public function show($id) {
         $data = User::find($id);
 
         if (!$data) {
@@ -34,5 +35,9 @@ class UserController extends Controller
         }
 
         return response()->json($data, 200);
+    }
+
+    public function adresses() {
+        return response()->json(Auth::user()->Adresses()->get(), 200);
     }
 }

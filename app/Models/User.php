@@ -45,13 +45,13 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany('App\Models\CartItem', 'USUARIO_ID', 'USUARIO_ID');
     }
 
-    public function address() {
-        return $this->hasOne(Address::class, 'USUARIO_ID', 'USUARIO_ID');
+    public function Adresses() {
+        return $this->hasMany('App\Models\Address', 'USUARIO_ID', 'USUARIO_ID');
     }
 
-    //Método para retornar um único objeto do endereço ativo do usuário
+    // Método para retornar um único objeto do endereço ativo do usuário
     public function activeAddress() {
-        return $this->address()->where('ENDERECO_APAGADO', 0)->first();
+        return $this->adresses()->where('ENDERECO_APAGADO', 0)->first();
     }
 
     public function getJWTIdentifier() {
