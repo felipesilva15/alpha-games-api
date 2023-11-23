@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\CustomValidationException;
 use Illuminate\Http\Request;
 use App\Models\CartItem;
 use App\Models\Product;
@@ -43,7 +44,7 @@ class CartController extends Controller
                 array_push($validator['cartItems'], ['product_id' => $item->PRODUTO_ID, 'icon' => 'production_quantity_limits', 'description' => 'Produto indisponível!']);
             }
 
-            if(!isset($item->produto->ProductStock->PRODUTO_QTD) || $item->produto->ProductStock->PRODUTO_QTD <= 0 || $item->ITEM_QTD > $item->produto->ProductStock->PRODUTO_QTD) {
+            if(!isset($item->produto->stock->PRODUTO_QTD) || $item->produto->stock->PRODUTO_QTD <= 0 || $item->ITEM_QTD > $item->produto->stock->PRODUTO_QTD) {
                 array_push($validator['cartItems'], ['product_id' => $item->PRODUTO_ID, 'icon' => 'production_quantity_limits', 'description' => 'Quantidade em estoque indisponível!']);
             }
         }
@@ -60,29 +61,26 @@ class CartController extends Controller
     }
 
     public function store(Product $product, Request $request){
+        $qtyItem = $request->qtyItem ? $request->qtyItem : 1;
+        
+        // Valida disponibilidade do produto
+        if($product->PRODUTO_ATIVO == 0){
+            throw new CustomValidationException("Produto indisponível!");
+        }
+
+        // Valida a quantidade em estoque 
+        if(!isset($product->stock->PRODUTO_QTD) || $qtyItem > $product->stock->PRODUTO_QTD){
+            throw new CustomValidationException("Quantidade em estoque indisponível!");
+        }
+
+        // Carrega o item do carrinho do usuário para o produto em questão
         $item = CartItem::where([
             ['USUARIO_ID', Auth::user()->USUARIO_ID],
             ['PRODUTO_ID', $product->PRODUTO_ID]
         ])->first();
 
-        $qtyItem = $request->qtyItem ? $request->qtyItem : 1;
-        $message = '';
-        
-        if($product->PRODUTO_ATIVO == 0){
-            return back()->with('error', 'Produto indisponível');
-        }
-
-        if(!isset($product->ProductStock->PRODUTO_QTD) || $qtyItem > $product->ProductStock->PRODUTO_QTD){
-            return back()->with('error', 'Quantidade em estoque indisponível');
-        }
-
+        // Verifica se deve atualizar ou criar o item no carrinho
         if($item){
-            if(!$item->ITEM_QTD){
-                $message = 'Item adicionado ao carrinho';
-            } else{
-                $message = 'Quantidade do item atualizada';
-            }
-
             $item->update([
                 'ITEM_QTD' => $qtyItem
             ]);
@@ -92,11 +90,9 @@ class CartController extends Controller
                 'PRODUTO_ID' => $product->PRODUTO_ID,
                 'ITEM_QTD' => $qtyItem
             ]);
-
-            $message = 'Item adicionado ao carrinho';
         }
 
-        return redirect(route('cart'))->with('message', $message);
+        return response()->json(['message' => 'Carrinho atualizado!'], 200);
     }
 
     public function destroy(Product $product){

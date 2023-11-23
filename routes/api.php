@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\SearchCepController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
@@ -33,4 +34,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     // Adresses
     Route::apiResource('address', AddressController::class);
+
+    // Cart
+    Route::patch('/cart/{product}', [CartController::class, 'store']);
 });
