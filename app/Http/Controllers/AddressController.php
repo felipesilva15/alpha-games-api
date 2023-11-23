@@ -11,6 +11,34 @@ use Illuminate\Support\Facades\Auth;
 
 class AddressController extends Controller
 {
+    public function index(Request $request) {
+        $builder = Address::query();
+
+        // User filter
+        if(isset($request->USUARIO_ID) && $request->USUARIO_ID) {
+            $builder->where('USUARIO_ID', $request->USUARIO_ID);
+        }
+
+        // CEP filter
+        if(isset($request->ENDERECO_CEP) && $request->ENDERECO_CEP) {
+            $builder->where('ENDERECO_CEP', 'like', '%'.$request->ENDERECO_CEP.'%');
+        }
+
+        // City filter
+        if(isset($request->ENDERECO_CIDADE) && $request->ENDERECO_CIDADE) {
+            $builder->where('ENDERECO_CIDADE', 'like', '%'.$request->ENDERECO_CIDADE.'%');
+        }
+
+        // State/UF filter
+        if(isset($request->ENDERECO_ESTADO) && $request->ENDERECO_ESTADO) {
+            $builder->where('ENDERECO_ESTADO', 'like', '%'.$request->ENDERECO_ESTADO.'%');
+        }
+
+        $data = $builder->get();
+
+        return response()->json($data, 200);
+    }
+
     public function show(int $id) {
         $data = Address::find($id);
 
