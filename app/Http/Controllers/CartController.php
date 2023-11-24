@@ -105,6 +105,6 @@ class CartController extends Controller
             'ITEM_QTD' => 0
         ]);
 
-        return redirect(route('cart'))->with('error', 'Item removido do carrinho');
+        return response()->json(['message' => 'Item removido do carrinho.'], 200);
     }
 }
