@@ -38,4 +38,5 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     // Cart
     Route::patch('/cart/{product}', [CartController::class, 'store']);
+    Route::delete('/cart/{product}', [CartController::class, 'destroy']);
 });
