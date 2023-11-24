@@ -40,4 +40,13 @@ class UserController extends Controller
     public function adresses() {
         return response()->json(Auth::user()->Adresses()->get(), 200);
     }
+
+    public function cart() {
+        $data = Auth::user()
+                    ->cartItems()
+                    ->with('product', 'product.category', 'product.images')
+                    ->get();
+
+        return response()->json($data, 200);
+    }
 }

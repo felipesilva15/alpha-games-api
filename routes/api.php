@@ -24,6 +24,7 @@ Route::get('/cep/{cep}', [SearchCepController::class, 'getAddressByCep']);
 Route::group(['middleware' => 'auth:api'], function () {
     // User
     Route::get('/user/adresses', [UserController::class, 'adresses']);
+    Route::get('/user/cart', [UserController::class, 'cart']);
     Route::get('/user/{id}', [UserController::class, 'show']);
     Route::get('/user', [UserController::class, 'index']);
     Route::get('/me', [AuthController::class, 'me']);
