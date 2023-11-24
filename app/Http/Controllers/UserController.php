@@ -45,6 +45,7 @@ class UserController extends Controller
         $data = Auth::user()
                     ->cartItems()
                     ->with('product', 'product.category', 'product.images')
+                    ->where('ITEM_QTD', '<>', '0')
                     ->get();
 
         return response()->json($data, 200);
