@@ -27,6 +27,19 @@ class UserController extends Controller
         return response()->json($data, 201);
     }
 
+    public function update(Request $request) {
+        $request->validate(User::rulesUpdate());
+
+        $user = Auth::user();
+
+        $data = $request->all();
+        $data['USUARIO_SENHA'] = Hash::make($data['USUARIO_SENHA']);
+
+        $user->update($data);
+
+        return response()->json($data, 200);
+    }
+
     public function show($id) {
         $data = User::find($id);
 

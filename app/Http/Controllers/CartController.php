@@ -61,7 +61,7 @@ class CartController extends Controller
     }
 
     public function store(Product $product, Request $request){
-        $qtyItem = $request->ITEM_QTD ? $request->ITEM_QTD : 1;
+        $qtyItem = $request->ITEM_QTD ? $request->ITEM_QTD : 0;
         
         // Valida disponibilidade do produto
         if($product->PRODUTO_ATIVO == 0){

@@ -31,10 +31,19 @@ class User extends Authenticatable implements JWTSubject
     public static function rules(): Array {
         return [
             'USUARIO_NOME' => 'required|string',
-            'USUARIO_EMAIL' => 'required|string|unique:USUARIO,USUARIO_EMAIL|email',
+            'USUARIO_EMAIL' => 'required|string|email|unique:USUARIO,USUARIO_EMAIL',
             'USUARIO_SENHA' => 'required|string|min:3',
             'USUARIO_CPF' => 'required|string|unique:USUARIO,USUARIO_CPF|min:11'
         ];
+    }
+
+    public static function rulesUpdate(): Array {
+        $rules = User::rules();
+
+        $rules['USUARIO_EMAIL'] = str_replace('|unique:USUARIO,USUARIO_EMAIL', '', $rules['USUARIO_EMAIL']);
+        $rules['USUARIO_CPF'] = str_replace('|unique:USUARIO,USUARIO_CPF', '', $rules['USUARIO_CPF']);
+
+        return $rules;
     }
 
     public function Orders() {
