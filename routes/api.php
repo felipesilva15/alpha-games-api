@@ -3,6 +3,7 @@
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SearchCepController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
@@ -25,6 +26,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     // User
     Route::get('/user/adresses', [UserController::class, 'adresses']);
     Route::get('/user/cart', [UserController::class, 'cart']);
+    Route::get('/user/orders', [UserController::class, 'orders']);
     Route::get('/user/{id}', [UserController::class, 'show']);
     Route::put('/user/{id}', [UserController::class, 'update']);
     Route::get('/user', [UserController::class, 'index']);
@@ -40,4 +42,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     // Cart
     Route::patch('/cart/{product}', [CartController::class, 'store']);
     Route::delete('/cart/{product}', [CartController::class, 'destroy']);
+
+    // Order
+    Route::get('/order/{order}', [OrderController::class, 'show']);
+    Route::post('/order', [OrderController::class, 'store']);
 });

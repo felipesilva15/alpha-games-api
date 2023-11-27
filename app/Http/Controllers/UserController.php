@@ -63,4 +63,15 @@ class UserController extends Controller
 
         return response()->json($data, 200);
     }
+
+    public function orders() {
+        $data = Auth::user()
+                    ->orders()
+                    ->get()
+                    ->sortByDesc('PEDIDO_ID')
+                    ->values()
+                    ->all();
+
+        return response()->json($data, 200);
+    }
 }

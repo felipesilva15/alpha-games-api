@@ -2,46 +2,42 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\CustomValidationException;
+use App\Exceptions\MasterNotFoundHttpException;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    public function index(){
-        $orders = Auth::user()->Orders->sortByDesc('PEDIDO_ID')->values()->all();
-
-        return view('order.order', ['orders' => $orders]);
-    }
-
-    public function show(Order $order){
+        public function show(Order $order){
         if($order->User->USUARIO_ID != Auth::user()->USUARIO_ID){
-            return abort(404);
+            throw new MasterNotFoundHttpException;
         }
 
-        return view('order.show', ['order' => $order]);
+        return response()->json($order, 200);
     }
 
     public function store(){
         $user = Auth::user();
 
         // Valida se existem itens no carrinho
-        if(!$user->CartItems->sum('ITEM_QTD')){
-            return back()->with('error', 'Insira ao menos um item no carrinho para finalizar o pedido!');
+        if(!$user->cart->sum('ITEM_QTD')){
+            throw new CustomValidationException('Insira ao menos um item no carrinho para finalizar o pedido!');
         }
 
         // Valida os itens do pedido
-        foreach ($user->CartItems as $item) {
+        foreach ($user->cart as $item) {
             if($item->ITEM_QTD <= 0){
                 continue;
             }
 
-            if($item->produto->PRODUTO_ATIVO == 0){
-                return back()->with('error', "O produto {$item->produto->PRODUTO_NOME} está indisponível");
+            if($item->product->PRODUTO_ATIVO == 0){
+                throw new CustomValidationException('O produto {$item->produto->PRODUTO_NOME} está indisponível!');
             }
     
-            if(!isset($item->produto->ProductStock->PRODUTO_QTD) || $item->ITEM_QTD > $item->produto->ProductStock->PRODUTO_QTD){
-                return back()->with('error', "O produto {$item->produto->PRODUTO_NOME} não possui em estoque");
+            if(!isset($item->product->stock->PRODUTO_QTD) || $item->ITEM_QTD > $item->product->stock->PRODUTO_QTD){
+                throw new CustomValidationException('O produto {$item->produto->PRODUTO_NOME} não possui em estoque');
             }
         }
 
@@ -53,7 +49,7 @@ class OrderController extends Controller
         ]);
 
         // Realiza atualização dos itens e estoque
-        foreach ($user->CartItems as $item) {
+        foreach ($user->cart as $item) {
             if(!$item->ITEM_QTD){
                 continue;
             }
@@ -63,13 +59,13 @@ class OrderController extends Controller
                 'PEDIDO_ID' => $order->PEDIDO_ID,
                 'PRODUTO_ID' => $item->PRODUTO_ID,
                 'ITEM_QTD' => $item->ITEM_QTD,
-                'ITEM_PRECO' => ($item->produto->PRODUTO_PRECO - $item->produto->PRODUTO_DESCONTO)
+                'ITEM_PRECO' => ($item->product->PRODUTO_PRECO - $item->product->PRODUTO_DESCONTO)
             ]);
 
             // Atualiza a quantidade de estoque do produto
-            if(isset($item->produto->ProductStock)){
-                $item->produto->ProductStock->update([
-                    'PRODUTO_QTD' => $item->produto->ProductStock->PRODUTO_QTD - $item->ITEM_QTD
+            if(isset($item->product->stock)){
+                $item->product->stock->update([
+                    'PRODUTO_QTD' => $item->product->stock->PRODUTO_QTD - $item->ITEM_QTD
                 ]);
             }
 
@@ -79,6 +75,6 @@ class OrderController extends Controller
             ]);
         }
 
-        return redirect(route('order.show', ['order' => $order->PEDIDO_ID]))->with('message', 'Pedido registrado!');
+        return response()->json(['message' => 'Pedido registrado!'], 201);
     }
 }
