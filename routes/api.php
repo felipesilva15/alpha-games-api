@@ -21,6 +21,7 @@ Route::get('/product/{id}', [ProductController::class, 'show']);
 
 // Search CEP
 Route::get('/cep/{cep}', [SearchCepController::class, 'getAddressByCep']);
+Route::post('/refresh-token', [AuthController::class, 'refresh']);
 
 Route::group(['middleware' => 'auth:api'], function () {
     // User
@@ -33,7 +34,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/me', [AuthController::class, 'me']);
 
     // Auth
-    Route::post('/refresh-token', [AuthController::class, 'refresh']);
     Route::post('/logout', [AuthController::class, 'logout']);
 
     // Adresses

@@ -3,31 +3,54 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\CustomValidationException;
+use App\Exceptions\MasterForbiddenHttpException;
 use App\Exceptions\MasterNotFoundHttpException;
+use App\Models\Address;
 use App\Models\Order;
 use App\Models\OrderItem;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-        public function show(Order $order){
-        if($order->User->USUARIO_ID != Auth::user()->USUARIO_ID){
-            throw new MasterNotFoundHttpException;
+    public function show(int $order){
+        $data = Order::with('items', 'items.product', 'items.product.category', 'items.product.images')
+                        ->find($order);
+
+        if (!$data) {
+            throw new MasterNotFoundHttpException();
         }
 
-        return response()->json($order, 200);
+        if($data->USUARIO_ID != Auth::user()->USUARIO_ID){
+            throw new MasterForbiddenHttpException();
+        }
+
+        return response()->json($data, 200);
     }
 
-    public function store(){
+    public function store(Request $request){
+        $request->validate(Order::rules());
+
+        $order = $request->all();
+        $address = Address::find($order['ENDERECO_ID']);
         $user = Auth::user();
 
         // Valida se existem itens no carrinho
-        if(!$user->cart->sum('ITEM_QTD')){
+        if (!$user->cartItems->sum('ITEM_QTD')) {
             throw new CustomValidationException('Insira ao menos um item no carrinho para finalizar o pedido!');
         }
 
+        // Valida se o endereço informado pertence ao usuário
+        if (!$address) {
+            throw new MasterNotFoundHttpException('Endereço não encontrado!');
+        }
+
+        if ($address->USUARIO_ID != Auth::user()->USUARIO_ID) {
+            throw new MasterForbiddenHttpException();
+        }
+
         // Valida os itens do pedido
-        foreach ($user->cart as $item) {
+        foreach ($user->cartItems as $item) {
             if($item->ITEM_QTD <= 0){
                 continue;
             }
@@ -41,15 +64,21 @@ class OrderController extends Controller
             }
         }
 
+        if (!isset($order['PEDIDO_DATA']) || !$order['PEDIDO_DATA']) {
+            $order['PEDIDO_DATA'] = now();
+        }
+
+        if (!isset($order['STATUS_ID']) || !$order['STATUS_ID']) {
+            $order['STATUS_ID'] = 1;
+        }
+
+        $order['USUARIO_ID'] = $user->USUARIO_ID;
+
         // Cria o pedido
-        $order = Order::create([
-            'USUARIO_ID' => $user->USUARIO_ID,
-            'STATUS_ID' => 1,
-            'PEDIDO_DATA' => now()
-        ]);
+        $order = Order::create($order);
 
         // Realiza atualização dos itens e estoque
-        foreach ($user->cart as $item) {
+        foreach ($user->cartItems as $item) {
             if(!$item->ITEM_QTD){
                 continue;
             }
