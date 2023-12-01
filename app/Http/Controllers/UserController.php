@@ -67,6 +67,7 @@ class UserController extends Controller
     public function orders() {
         $data = Auth::user()
                     ->orders()
+                    ->with('status')
                     ->get()
                     ->sortByDesc('PEDIDO_ID')
                     ->values()

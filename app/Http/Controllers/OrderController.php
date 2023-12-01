@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 class OrderController extends Controller
 {
     public function show(int $order){
-        $data = Order::with('items', 'items.product', 'items.product.category', 'items.product.images')
+        $data = Order::with('status', 'address', 'items', 'items.product', 'items.product.category', 'items.product.images')
                         ->find($order);
 
         if (!$data) {

@@ -37,6 +37,10 @@ class Order extends Model
         return $this->hasMany('App\Models\OrderItem', 'PEDIDO_ID', 'PEDIDO_ID');
     }
 
+    public function address() {
+        return $this->belongsTo('App\Models\Address', 'ENDERECO_ID', 'ENDERECO_ID');
+    }
+
     public function number() {
         return '#'.str_pad($this->PEDIDO_ID, 6, '0', STR_PAD_LEFT);
     }
