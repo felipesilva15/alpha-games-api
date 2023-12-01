@@ -51,7 +51,7 @@ class UserController extends Controller
     }
 
     public function adresses() {
-        return response()->json(Auth::user()->Adresses()->get(), 200);
+        return response()->json(Auth::user()->adresses()->get(), 200);
     }
 
     public function cart() {

@@ -25,20 +25,7 @@ class Address extends Model
     ];
 
     public function user() {
-        return $this->belongsTo(User::class, 'USUARIO_ID', 'USUARIO_ID');
-    }
-
-    //Método para montar o endereço completo formatado
-    public function FormattedAddress() {
-        $formattedAddress = $this->ENDERECO_LOGRADOURO . ', ' . $this->ENDERECO_NUMERO;
-
-        if ($this->ENDERECO_COMPLEMENTO) {
-            $formattedAddress .= ' - ' . $this->ENDERECO_COMPLEMENTO;
-        }
-
-        $formattedAddress .= ' - ' . $this->ENDERECO_CIDADE . ', ' . $this->ENDERECO_ESTADO . ' - CEP ' . $this->ENDERECO_CEP;
-
-        return $formattedAddress;
+        return $this->belongsTo('App\Models\User', 'USUARIO_ID');
     }
 
     public static function rules(): array {

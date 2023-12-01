@@ -23,23 +23,7 @@ class CartItem extends Model
     }
 
     public function user() {
-        return $this->belongsTo(Usuario::class, 'usuario_id');
-    }
-
-    public function CartTotal() {
-        return $this->sum('ITEM_QTD') * $this->produto->PRODUTO_PRECO;
-    }
-
-    public function QtyItems() {
-        return $this->sum('ITEM_QTD');
-    }
-
-    public function FormattedItemTotal(): string {
-        if(isset($this->produto->ProductStock->PRODUTO_QTD) && $this->produto->ProductStock->PRODUTO_QTD != 0 && $this->produto->PRODUTO_ATIVO == 1){
-            return 'R$ ' . number_format(($this->produto->PRODUTO_PRECO - $this->produto->PRODUTO_DESCONTO) * $this->ITEM_QTD, 2, ',', '');
-        }
-
-        return 'R$ --,--';
+        return $this->belongsTo('App\Models\User', 'USUARIO_ID');
     }
 
     protected function setKeysForSaveQuery($query) {

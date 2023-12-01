@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -47,20 +46,15 @@ class User extends Authenticatable implements JWTSubject
     }
 
     public function orders() {
-        return $this->hasMany('App\Models\Order', 'USUARIO_ID', 'USUARIO_ID');
+        return $this->hasMany('App\Models\Order', 'USUARIO_ID');
     }
 
     public function cartItems() {
-        return $this->hasMany('App\Models\CartItem', 'USUARIO_ID', 'USUARIO_ID');
+        return $this->hasMany('App\Models\CartItem', 'USUARIO_ID');
     }
 
-    public function Adresses() {
-        return $this->hasMany('App\Models\Address', 'USUARIO_ID', 'USUARIO_ID');
-    }
-
-    // Método para retornar um único objeto do endereço ativo do usuário
-    public function activeAddress() {
-        return $this->adresses()->where('ENDERECO_APAGADO', 0)->first();
+    public function adresses() {
+        return $this->hasMany('App\Models\Address', 'USUARIO_ID');
     }
 
     public function getJWTIdentifier() {

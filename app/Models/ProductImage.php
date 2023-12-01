@@ -11,7 +11,7 @@ class ProductImage extends Model
 
     protected $table = "PRODUTO_IMAGEM";
 
-    public function Product() {
+    public function product() {
         return $this->belongsTo('App\Models\Product', 'PRODUTO_ID', 'PRODUTO_ID');
     }
 }

@@ -10,56 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-    public function index(){
-        // Buscar os itens do carrinho na tabela CARRINHO_ITEM
-        $cartItems = CartItem::where([
-            ['USUARIO_ID', auth()->id()],
-            ['ITEM_QTD', '<>', 0]
-        ])->get();
-
-        $totalizer = [
-            'TOTAL_PRODUTO' => 0,
-            'TOTAL_DESCONTO' => 0,
-            'TOTAL' => 0 
-        ];
-
-        foreach ($cartItems as $item){
-            $totalizer['TOTAL_PRODUTO'] += ($item->produto->PRODUTO_PRECO) * $item->ITEM_QTD;
-            $totalizer['TOTAL_DESCONTO'] += ($item->produto->PRODUTO_DESCONTO) * $item->ITEM_QTD;
-            $totalizer['TOTAL'] += ($item->produto->PRODUTO_PRECO - $item->produto->PRODUTO_DESCONTO) * $item->ITEM_QTD;
-        }
-
-        $validator =  [
-            'hasError' => false,
-            'cartItems' => [],
-            'user' => []
-        ];
-
-        if(!Auth::user()->activeAddress()) {
-            $validator['user']['address'] = ['icon' => 'home', 'description' => 'Endereço não cadastrado!'];
-        }
-
-        foreach ($cartItems as $item) {
-            if($item->produto->PRODUTO_ATIVO != 1) {
-                array_push($validator['cartItems'], ['product_id' => $item->PRODUTO_ID, 'icon' => 'production_quantity_limits', 'description' => 'Produto indisponível!']);
-            }
-
-            if(!isset($item->produto->stock->PRODUTO_QTD) || $item->produto->stock->PRODUTO_QTD <= 0 || $item->ITEM_QTD > $item->produto->stock->PRODUTO_QTD) {
-                array_push($validator['cartItems'], ['product_id' => $item->PRODUTO_ID, 'icon' => 'production_quantity_limits', 'description' => 'Quantidade em estoque indisponível!']);
-            }
-        }
-
-        $validator['hasError'] = count($validator['user']) || count($validator['cartItems']) ? true : false;
-        $validator = json_decode(json_encode($validator), false);
-
-        // Retornar a view do carrinho de compras com os itens encontrados
-        return view('cart.cart', [
-            'cartItems' => $cartItems,
-            'totalizer' => $totalizer,
-            'validator' => $validator
-        ]);
-    }
-
     public function store(Product $product, Request $request){
         $qtyItem = $request->ITEM_QTD ? $request->ITEM_QTD : 0;
         

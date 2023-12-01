@@ -40,22 +40,4 @@ class Order extends Model
     public function address() {
         return $this->belongsTo('App\Models\Address', 'ENDERECO_ID', 'ENDERECO_ID');
     }
-
-    public function number() {
-        return '#'.str_pad($this->PEDIDO_ID, 6, '0', STR_PAD_LEFT);
-    }
-
-    public function date() {
-        return date('d/m/Y', strtotime($this->PEDIDO_DATA));
-    }
-
-    public function qtyItems() {
-        return number_format($this->OrderItems->sum('ITEM_QTD'), 0, '', '.');
-    }
-
-    public function total() {
-        return number_format($this->OrderItems->sum(function ($item) {
-            return $item->ITEM_QTD * $item->ITEM_PRECO;
-        }), 2, ',', '.');
-    }
 }
