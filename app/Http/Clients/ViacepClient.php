@@ -19,7 +19,7 @@ class ViacepClient
      */
     public static function getAddressByCep(string $cep) {
         // Valida o CEP
-        if (!$cep || strlen(str_replace('-', '', $cep)) < 8) {
+        if (!$cep || strlen(str_replace('-', '', $cep)) < 8 || strlen(str_replace('-', '', $cep)) > 8) {
             throw new CustomValidationException('CEP inválido!');
         }
 
