@@ -7,8 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\CartItem;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Routing\Controller as BaseController;
 
-class CartController extends Controller
+class CartController extends BaseController
 {
     public function store(Product $product, Request $request){
         $qtyItem = $request->ITEM_QTD ? $request->ITEM_QTD : 0;

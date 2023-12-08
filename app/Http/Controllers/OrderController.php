@@ -13,7 +13,12 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    public function show(int $order){
+    public function __construct(Order $model, Request $request) {
+        $this->model = $model;
+        $this->request = $request;
+    }
+
+    public function show($order){
         $data = Order::with('status', 'address', 'items', 'items.product', 'items.product.category', 'items.product.images')
                         ->find($order);
 

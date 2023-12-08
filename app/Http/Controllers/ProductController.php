@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\MasterNotFoundHttpException;
 use App\Models\Product;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    public function __construct(Product $model, Request $request) {
+        $this->model = $model;
+        $this->request = $request;
+    }
+
     public function index(){
         $builder = Product::query();
 
@@ -36,7 +42,7 @@ class ProductController extends Controller
         return response()->json($data, 200);
     }
 
-    public function show(int $id){
+    public function show($id){
         $data = Product::with("category")
                         ->with('images')
                         ->withSum('stock as PRODUTO_QTD', 'produto_qtd')

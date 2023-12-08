@@ -9,27 +9,32 @@ use Illuminate\Support\Facades\Auth;
 
 class AddressController extends Controller
 {
-    public function index(Request $request) {
+    public function __construct(Address $model, Request $request) {
+        $this->model = $model;
+        $this->request = $request;
+    }
+
+    public function index() {
         $builder = Address::query();
 
         // User filter
-        if(isset($request->USUARIO_ID) && $request->USUARIO_ID) {
-            $builder->where('USUARIO_ID', $request->USUARIO_ID);
+        if(isset($this->request->USUARIO_ID) && $this->request->USUARIO_ID) {
+            $builder->where('USUARIO_ID', $this->request->USUARIO_ID);
         }
 
         // CEP filter
-        if(isset($request->ENDERECO_CEP) && $request->ENDERECO_CEP) {
-            $builder->where('ENDERECO_CEP', 'like', '%'.$request->ENDERECO_CEP.'%');
+        if(isset($this->request->ENDERECO_CEP) && $this->request->ENDERECO_CEP) {
+            $builder->where('ENDERECO_CEP', 'like', '%'.$this->request->ENDERECO_CEP.'%');
         }
 
         // City filter
-        if(isset($request->ENDERECO_CIDADE) && $request->ENDERECO_CIDADE) {
-            $builder->where('ENDERECO_CIDADE', 'like', '%'.$request->ENDERECO_CIDADE.'%');
+        if(isset($this->request->ENDERECO_CIDADE) && $this->request->ENDERECO_CIDADE) {
+            $builder->where('ENDERECO_CIDADE', 'like', '%'.$this->request->ENDERECO_CIDADE.'%');
         }
 
         // State/UF filter
-        if(isset($request->ENDERECO_ESTADO) && $request->ENDERECO_ESTADO) {
-            $builder->where('ENDERECO_ESTADO', 'like', '%'.$request->ENDERECO_ESTADO.'%');
+        if(isset($this->request->ENDERECO_ESTADO) && $this->request->ENDERECO_ESTADO) {
+            $builder->where('ENDERECO_ESTADO', 'like', '%'.$this->request->ENDERECO_ESTADO.'%');
         }
 
         $data = $builder->get();
@@ -37,7 +42,7 @@ class AddressController extends Controller
         return response()->json($data, 200);
     }
 
-    public function show(int $id) {
+    public function show($id) {
         $data = Address::find($id);
 
         if (!$data) {

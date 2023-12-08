@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    public function __construct(User $model, Request $request) {
+        $this->model = $model;
+        $this->request = $request;
+    }
+
     public function index() {
         return response()->json(User::all(), 200);
     }
@@ -27,7 +32,7 @@ class UserController extends Controller
         return response()->json($data, 201);
     }
 
-    public function update(Request $request) {
+    public function update(Request $request, $id) {
         $request->validate(User::rulesUpdate());
 
         $user = Auth::user();

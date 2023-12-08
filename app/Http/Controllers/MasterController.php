@@ -2,24 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\MasterNotFoundHttpException;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
-use App\Exceptions\MasterNotFoundHttpException;
-use Illuminate\Http\Request;
 
-class Controller extends BaseController
+class MasterController extends BaseController
 {
-    use AuthorizesRequests, ValidatesRequests;
-
     use AuthorizesRequests, ValidatesRequests;
 
     protected $model;
     protected $request;
 
-    public function index() {
+    public function index(Request $request) {
         $query = $this->model::query();
-        $filters = $this->request->all();
+        $filters = $request->all();
 
         // Filtros extras além do fillable
         $othersFillableFields = [];
