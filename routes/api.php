@@ -3,6 +3,7 @@
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SearchCepController;
 use App\Http\Controllers\ProductController;
@@ -18,6 +19,9 @@ Route::post('/user', [UserController::class, 'store']);
 // Products
 Route::get('/product', [ProductController::class, 'index']);
 Route::get('/product/{id}', [ProductController::class, 'show']);
+
+// Category
+Route::apiResource('/category', CategoryController::class);
 
 // Search CEP
 Route::get('/cep/{cep}', [SearchCepController::class, 'getAddressByCep']);
