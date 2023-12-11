@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderStatusController;
 use App\Http\Controllers\SearchCepController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
@@ -50,4 +51,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     // Order
     Route::get('/order/{order}', [OrderController::class, 'show']);
     Route::post('/order', [OrderController::class, 'store']);
+
+    // Order Status
+    Route::apiResource('/order-status', OrderStatusController::class);
 });
