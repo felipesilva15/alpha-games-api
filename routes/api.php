@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\AdministratorController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
@@ -54,4 +55,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     // Order Status
     Route::apiResource('/order-status', OrderStatusController::class);
+
+    // Admin
+    Route::apiResource('/admin', AdministratorController::class);
 });
