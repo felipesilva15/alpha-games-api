@@ -8,6 +8,21 @@ use Illuminate\Routing\Controller as BaseController;
 use App\Exceptions\MasterNotFoundHttpException;
 use Illuminate\Http\Request;
 
+/**
+ * @OA\Info(
+ *      title="Alpha Games API Docs",
+ *      version="1.0.0",
+ *      description="API para execução de funcionalidades do e-commerce de jogos Alpha Games",
+ *      @OA\Contact(
+ *          email="felipe.allware@gmail.com",
+ *          name="Felipe Silva"
+ *      ),
+ *      @OA\License(
+ *          name="Licença API",
+ *          url="https://github.com/felipesilva15/alpha-games-api/blob/main/LICENSE"
+ *      )
+ * )
+ */
 class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
@@ -51,16 +66,6 @@ class Controller extends BaseController
         return response()->json($data, 201);
     }
 
-    public function show($id) {
-        $data = $this->model::find($id);
-
-        if (!$data) {
-            throw new MasterNotFoundHttpException;
-        }
-
-        return response()->json($data, 200);
-    }
-
     public function update(Request $request, $id) {
         $data = $this->model::find($id);
 
@@ -72,7 +77,7 @@ class Controller extends BaseController
             $request->validate($this->model::rules());
         }
             
-        $data = $data->update($request->all());
+        $data->update($request->all());
 
         return response()->json($data, 200);
     }

@@ -1,0 +1,379 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Alpha Games API Docs",
+        "description": "API para execução de funcionalidades do e-commerce de jogos Alpha Games",
+        "contact": {
+            "name": "Felipe Silva",
+            "email": "felipe.allware@gmail.com"
+        },
+        "license": {
+            "name": "Licença API",
+            "url": "https://github.com/felipesilva15/alpha-games-api/blob/main/LICENSE"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/order-status": {
+            "get": {
+                "tags": [
+                    "Order status"
+                ],
+                "summary": "Lista todos os status de pedidos",
+                "operationId": "3dec5c4dfd643e6ee9c76656d763861c",
+                "parameters": [
+                    {
+                        "name": "STATUS_DESC",
+                        "in": "query",
+                        "description": "Descrição do status do pedido",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de status de pedidos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "STATUS_ID": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "STATUS_DESC": {
+                                                "type": "string",
+                                                "example": "Em andamento"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não autorizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "string",
+                                            "example": "EXCPHAND001"
+                                        },
+                                        "endpoint": {
+                                            "type": "string",
+                                            "example": "api/order-status"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Token de acesso inválido."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Order status"
+                ],
+                "summary": "Registra um status de pedido",
+                "operationId": "0fb8bb32d4c6b31e7c37ffeb9bcaba5c",
+                "requestBody": {
+                    "description": "Dados para criar um novo status de pedido",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "STATUS_DESC": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Dados do status do pedido registrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "STATUS_ID": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "STATUS_DESC": {
+                                            "type": "string",
+                                            "example": "Em andamento"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não autorizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "string",
+                                            "example": "EXCPHAND001"
+                                        },
+                                        "endpoint": {
+                                            "type": "string",
+                                            "example": "api/order-status"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Token de acesso inválido."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/order-status/{id}": {
+            "get": {
+                "tags": [
+                    "Order status"
+                ],
+                "summary": "Lista um status do pedido pelo ID",
+                "operationId": "afeddd47a5f76adc17ce6e7d619b98a0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do status do pedido",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dados do status do pedido",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "STATUS_ID": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "STATUS_DESC": {
+                                            "type": "string",
+                                            "example": "Em andamento"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não autorizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "string",
+                                            "example": "EXCPHAND001"
+                                        },
+                                        "endpoint": {
+                                            "type": "string",
+                                            "example": "api/order-status"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Token de acesso inválido."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Registro não encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "string",
+                                            "example": "EXCPHAND001"
+                                        },
+                                        "endpoint": {
+                                            "type": "string",
+                                            "example": "api/order-status/1"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Registro não encontrado."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Order status"
+                ],
+                "summary": "Altera um status do pedido",
+                "operationId": "2cd7ab3d82b8ad4905149cb56cd60a43",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do status do pedido",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Dados para alterar o status do pedido",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "STATUS_DESC": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Dados do status do pedido alterado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "STATUS_ID": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "STATUS_DESC": {
+                                            "type": "string",
+                                            "example": "Em andamento"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não autorizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "string",
+                                            "example": "EXCPHAND001"
+                                        },
+                                        "endpoint": {
+                                            "type": "string",
+                                            "example": "api/order-status"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Token de acesso inválido."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Registro não encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "string",
+                                            "example": "EXCPHAND001"
+                                        },
+                                        "endpoint": {
+                                            "type": "string",
+                                            "example": "api/order-status/1"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Registro não encontrado."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    }
+}
