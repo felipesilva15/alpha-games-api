@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "Alpha Games API Docs",
-        "description": "API para execução de funcionalidades do e-commerce de jogos Alpha Games",
+        "description": "API for executing Alpha Games gaming e-commerce functionalities",
         "contact": {
             "name": "Felipe Silva",
             "email": "felipe.allware@gmail.com"
@@ -19,13 +19,13 @@
                 "tags": [
                     "Order status"
                 ],
-                "summary": "Lista todos os status de pedidos",
+                "summary": "List all order statuses",
                 "operationId": "3dec5c4dfd643e6ee9c76656d763861c",
                 "parameters": [
                     {
                         "name": "STATUS_DESC",
                         "in": "query",
-                        "description": "Descrição do status do pedido",
+                        "description": "Order status description",
                         "schema": {
                             "type": "string"
                         }
@@ -33,7 +33,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Lista de status de pedidos",
+                        "description": "Order status list",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -56,7 +56,7 @@
                         }
                     },
                     "401": {
-                        "description": "Não autorizado",
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -90,10 +90,10 @@
                 "tags": [
                     "Order status"
                 ],
-                "summary": "Registra um status de pedido",
+                "summary": "Registers an order status",
                 "operationId": "0fb8bb32d4c6b31e7c37ffeb9bcaba5c",
                 "requestBody": {
-                    "description": "Dados para criar um novo status de pedido",
+                    "description": "Data for creating a new order status",
                     "required": true,
                     "content": {
                         "application/json": {
@@ -110,7 +110,7 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Dados do status do pedido registrado",
+                        "description": "Registered order status data",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -130,7 +130,7 @@
                         }
                     },
                     "401": {
-                        "description": "Não autorizado",
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -166,13 +166,13 @@
                 "tags": [
                     "Order status"
                 ],
-                "summary": "Lista um status do pedido pelo ID",
+                "summary": "List an order status by ID",
                 "operationId": "afeddd47a5f76adc17ce6e7d619b98a0",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "ID do status do pedido",
+                        "description": "Order Status ID",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -181,7 +181,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Dados do status do pedido",
+                        "description": "Order status data",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -201,7 +201,7 @@
                         }
                     },
                     "401": {
-                        "description": "Não autorizado",
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -212,7 +212,7 @@
                                         },
                                         "endpoint": {
                                             "type": "string",
-                                            "example": "api/order-status"
+                                            "example": "api/order-status/1"
                                         },
                                         "message": {
                                             "type": "string",
@@ -225,7 +225,7 @@
                         }
                     },
                     "404": {
-                        "description": "Registro não encontrado",
+                        "description": "Record not found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -259,13 +259,13 @@
                 "tags": [
                     "Order status"
                 ],
-                "summary": "Altera um status do pedido",
+                "summary": "Update an order status",
                 "operationId": "2cd7ab3d82b8ad4905149cb56cd60a43",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "ID do status do pedido",
+                        "description": "Order status ID",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -273,7 +273,7 @@
                     }
                 ],
                 "requestBody": {
-                    "description": "Dados para alterar o status do pedido",
+                    "description": "Data for update order status",
                     "required": true,
                     "content": {
                         "application/json": {
@@ -290,7 +290,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Dados do status do pedido alterado",
+                        "description": "Updated order status data",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -310,7 +310,7 @@
                         }
                     },
                     "401": {
-                        "description": "Não autorizado",
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -321,7 +321,7 @@
                                         },
                                         "endpoint": {
                                             "type": "string",
-                                            "example": "api/order-status"
+                                            "example": "api/order-status/1"
                                         },
                                         "message": {
                                             "type": "string",
@@ -334,7 +334,96 @@
                         }
                     },
                     "404": {
-                        "description": "Registro não encontrado",
+                        "description": "RRecord not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "string",
+                                            "example": "EXCPHAND001"
+                                        },
+                                        "endpoint": {
+                                            "type": "string",
+                                            "example": "api/order-status/1"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Registro não encontrado."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Order status"
+                ],
+                "summary": "Deletes an order status",
+                "operationId": "1211505793d3368926d238d3d941850b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Order status ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Return message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Registro deletado com sucesso!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "string",
+                                            "example": "EXCPHAND001"
+                                        },
+                                        "endpoint": {
+                                            "type": "string",
+                                            "example": "api/order-status/1"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Token de acesso inválido."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Record not found",
                         "content": {
                             "application/json": {
                                 "schema": {

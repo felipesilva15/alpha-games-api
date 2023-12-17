@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
  * @OA\Info(
  *      title="Alpha Games API Docs",
  *      version="1.0.0",
- *      description="API para execução de funcionalidades do e-commerce de jogos Alpha Games",
+ *      description="API for executing Alpha Games gaming e-commerce functionalities",
  *      @OA\Contact(
  *          email="felipe.allware@gmail.com",
  *          name="Felipe Silva"

@@ -16,16 +16,16 @@ class OrderStatusController extends Controller
      * @OA\Get(
      *      path="/api/order-status",
      *      tags={"Order status"},
-     *      summary="Lista todos os status de pedidos",
+     *      summary="List all order statuses",
      *      @OA\Parameter(
      *         name="STATUS_DESC",
      *         in="query",
-     *         description="Descrição do status do pedido",
+     *         description="Order status description",
      *         @OA\Schema(type="string")
      *     ),
      *     @OA\Response(
      *          response="200", 
-     *          description="Lista de status de pedidos",
+     *          description="Order status list",
      *          @OA\JsonContent(
      *             type="array",
      *             @OA\Items(
@@ -37,7 +37,7 @@ class OrderStatusController extends Controller
      *     ),
      *     @OA\Response(
      *          response="401", 
-     *          description="Não autorizado",
+     *          description="Unauthorized",
      *          @OA\JsonContent(
      *              type="object",
      *              @OA\Property(property="code", type="string", example="EXCPHAND001"),
@@ -56,17 +56,17 @@ class OrderStatusController extends Controller
      * @OA\Get(
      *      path="/api/order-status/{id}",
      *      tags={"Order status"},
-     *      summary="Lista um status do pedido pelo ID",
+     *      summary="List an order status by ID",
      *      @OA\Parameter(
      *         name="id",
      *         in="path",
      *         required=true,
-     *         description="ID do status do pedido",
+     *         description="Order Status ID",
      *         @OA\Schema(type="integer")
      *     ),
      *     @OA\Response(
      *          response="200", 
-     *          description="Dados do status do pedido",
+     *          description="Order status data",
      *          @OA\JsonContent(
      *             type="object",
      *             @OA\Property(property="STATUS_ID", type="integer", example=1),
@@ -75,17 +75,17 @@ class OrderStatusController extends Controller
      *     ),
      *     @OA\Response(
      *          response="401", 
-     *          description="Não autorizado",
+     *          description="Unauthorized",
      *          @OA\JsonContent(
      *              type="object",
      *              @OA\Property(property="code", type="string", example="EXCPHAND001"),
-     *              @OA\Property(property="endpoint", type="string", example="api/order-status"),
+     *              @OA\Property(property="endpoint", type="string", example="api/order-status/1"),
      *              @OA\Property(property="message", type="string", example="Token de acesso inválido.")
      *         )
      *     ),
      *     @OA\Response(
      *          response="404", 
-     *          description="Registro não encontrado",
+     *          description="Record not found",
      *          @OA\JsonContent(
      *              type="object",
      *              @OA\Property(property="code", type="string", example="EXCPHAND001"),
@@ -104,10 +104,10 @@ class OrderStatusController extends Controller
      * @OA\Post(
      *      path="/api/order-status",
      *      tags={"Order status"},
-     *      summary="Registra um status de pedido",
+     *      summary="Registers an order status",
      *      @OA\RequestBody(
      *         required=true,
-     *         description="Dados para criar um novo status de pedido",
+     *         description="Data for creating a new order status",
      *         @OA\JsonContent(
      *             type="object",
      *             @OA\Property(property="STATUS_DESC", type="string")
@@ -115,7 +115,7 @@ class OrderStatusController extends Controller
      *     ),
      *     @OA\Response(
      *          response="201", 
-     *          description="Dados do status do pedido registrado",
+     *          description="Registered order status data",
      *          @OA\JsonContent(
      *             type="object",
      *             @OA\Property(property="STATUS_ID", type="integer", example=1),
@@ -125,7 +125,7 @@ class OrderStatusController extends Controller
      *     ),
      *     @OA\Response(
      *          response="401", 
-     *          description="Não autorizado",
+     *          description="Unauthorized",
      *          @OA\JsonContent(
      *              type="object",
      *              @OA\Property(property="code", type="string", example="EXCPHAND001"),
@@ -144,17 +144,17 @@ class OrderStatusController extends Controller
      * @OA\Put(
      *      path="/api/order-status/{id}",
      *      tags={"Order status"},
-     *      summary="Altera um status do pedido",
+     *      summary="Update an order status",
      *      @OA\Parameter(
      *         name="id",
      *         in="path",
      *         required=true,
-     *         description="ID do status do pedido",
+     *         description="Order status ID",
      *         @OA\Schema(type="integer")
      *     ),
      *      @OA\RequestBody(
      *         required=true,
-     *         description="Dados para alterar o status do pedido",
+     *         description="Data for update order status",
      *         @OA\JsonContent(
      *             type="object",
      *             @OA\Property(property="STATUS_DESC", type="string")
@@ -162,7 +162,7 @@ class OrderStatusController extends Controller
      *     ),
      *     @OA\Response(
      *          response="200", 
-     *          description="Dados do status do pedido alterado",
+     *          description="Updated order status data",
      *          @OA\JsonContent(
      *             type="object",
      *             @OA\Property(property="STATUS_ID", type="integer", example=1),
@@ -172,17 +172,17 @@ class OrderStatusController extends Controller
      *     ),
      *     @OA\Response(
      *          response="401", 
-     *          description="Não autorizado",
+     *          description="Unauthorized",
      *          @OA\JsonContent(
      *              type="object",
      *              @OA\Property(property="code", type="string", example="EXCPHAND001"),
-     *              @OA\Property(property="endpoint", type="string", example="api/order-status"),
+     *              @OA\Property(property="endpoint", type="string", example="api/order-status/1"),
      *              @OA\Property(property="message", type="string", example="Token de acesso inválido.")
      *         )
      *     ),
      *     @OA\Response(
      *          response="404", 
-     *          description="Registro não encontrado",
+     *          description="RRecord not found",
      *          @OA\JsonContent(
      *              type="object",
      *              @OA\Property(property="code", type="string", example="EXCPHAND001"),
@@ -195,5 +195,53 @@ class OrderStatusController extends Controller
      */
     public function update(Request $request, $id) {
         return parent::update($request, $id);
+    }
+
+    /**
+     * @OA\Delete(
+     *      path="/api/order-status/{id}",
+     *      tags={"Order status"},
+     *      summary="Deletes an order status",
+     *      @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="Order status ID",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *          response="200", 
+     *          description="Return message",
+     *          @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="message", type="string", example="Registro deletado com sucesso!")
+     *             
+     *         )
+     *     ),
+     *     @OA\Response(
+     *          response="401", 
+     *          description="Unauthorized",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(property="code", type="string", example="EXCPHAND001"),
+     *              @OA\Property(property="endpoint", type="string", example="api/order-status/1"),
+     *              @OA\Property(property="message", type="string", example="Token de acesso inválido.")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *          response="404", 
+     *          description="Record not found",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(property="code", type="string", example="EXCPHAND001"),
+     *              @OA\Property(property="endpoint", type="string", example="api/order-status/1"),
+     *              @OA\Property(property="message", type="string", example="Registro não encontrado.")
+     *         )
+     *     ),
+     *     security={{"bearerAuth":{}}}
+     * )
+     */
+    public function destroy( $id) {
+        return parent::destroy($id);
     }
 }
