@@ -956,6 +956,45 @@
                 ]
             }
         },
+        "/api/user/cart": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "List all user cart items",
+                "operationId": "40332048122c30af426b9c8133712445",
+                "responses": {
+                    "200": {
+                        "description": "User cart items list",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CartItemDTO"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/user/orders": {
             "get": {
                 "tags": [

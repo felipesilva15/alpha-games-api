@@ -224,6 +224,27 @@ class UserController extends Controller
         return response()->json(Auth::user()->adresses()->get(), 200);
     }
 
+    /**
+     * @OA\Get(
+     *      path="/api/user/cart",
+     *      tags={"User"},
+     *      summary="List all user cart items",
+     *      @OA\Response(
+     *          response="200", 
+     *          description="User cart items list",
+     *          @OA\JsonContent(
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/CartItemDTO")
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response="401", 
+     *          description="Unauthorized",
+     *          @OA\JsonContent(ref="#/components/schemas/ApiError")
+     *      ),
+     *      security={{"bearerAuth":{}}}
+     * )
+     */
     public function cart() {
         $data = Auth::user()
                     ->cartItems()
