@@ -15,10 +15,100 @@ class UserController extends Controller
         $this->request = $request;
     }
 
+    /**
+     * @OA\Get(
+     *      path="/api/user",
+     *      tags={"User"},
+     *      summary="List all users",
+     *      @OA\Parameter(
+     *         name="USUARIO_NOME",
+     *         in="query",
+     *         description="User name",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="USUARIO_EMAIL",
+     *         in="query",
+     *         description="User e-mail",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="USUARIO_CPF",
+     *         in="query",
+     *         description="User CPF",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(
+     *          response="200", 
+     *          description="User list",
+     *          @OA\JsonContent(
+     *             type="array",
+     *             @OA\Items(
+     *                  type="object",
+     *                  @OA\Property(property="USUARIO_ID", type="integer", example=1),
+     *                  @OA\Property(property="USUARIO_NOME", type="string", example="Username"),
+     *                  @OA\Property(property="USUARIO_EMAIL", type="string", example="example@example.com"),
+     *                  @OA\Property(property="USUARIO_CPF", type="string", example="12685963501")
+     *         )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *          response="401", 
+     *          description="Unauthorized",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(property="code", type="string", example="EXCPHAND001"),
+     *              @OA\Property(property="endpoint", type="string", example="api/user"),
+     *              @OA\Property(property="message", type="string", example="Token de acesso inválido.")
+     *         )
+     *     ),
+     *     security={{"bearerAuth":{}}}
+     * )
+     */
     public function index() {
-        return response()->json(User::all(), 200);
+        return parent::index();
     }
 
+    /**
+     * @OA\Post(
+     *      path="/api/user",
+     *      tags={"User"},
+     *      summary="Registers an user",
+     *      @OA\RequestBody(
+     *         required=true,
+     *         description="Data for creating a new user",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="USUARIO_NOME", type="string", example="Username"),
+     *             @OA\Property(property="USUARIO_EMAIL", type="string", example="example@example.com"),
+     *             @OA\Property(property="USUARIO_SENHA", type="string", example="123"),
+     *             @OA\Property(property="USUARIO_CPF", type="string", example="12685963501")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *          response="201", 
+     *          description="Registered user data",
+     *          @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="USUARIO_ID", type="integer", example=1),
+     *             @OA\Property(property="USUARIO_NOME", type="string", example="Username"),
+     *             @OA\Property(property="USUARIO_EMAIL", type="string", example="example@example.com"),
+     *             @OA\Property(property="USUARIO_CPF", type="string", example="12685963501")
+     *             
+     *         )
+     *     ),
+     *     @OA\Response(
+     *          response="401", 
+     *          description="Unauthorized",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(property="code", type="string", example="EXCPHAND001"),
+     *              @OA\Property(property="endpoint", type="string", example="api/user"),
+     *              @OA\Property(property="message", type="string", example="Token de acesso inválido.")
+     *         )
+     *     )
+     * )
+     */
     public function store(Request $request) {
         $request->validate(User::rules());
 
@@ -32,6 +122,47 @@ class UserController extends Controller
         return response()->json($data, 201);
     }
 
+    /**
+     * @OA\Put(
+     *      path="/api/user",
+     *      tags={"User"},
+     *      summary="Update an user",
+     *      @OA\RequestBody(
+     *         required=true,
+     *         description="Data for update user",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="USUARIO_NOME", type="string", example="Username"),
+     *             @OA\Property(property="USUARIO_EMAIL", type="string", example="example@example.com"),
+     *             @OA\Property(property="USUARIO_SENHA", type="string", example="123"),
+     *             @OA\Property(property="USUARIO_CPF", type="string", example="12685963501")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *          response="200", 
+     *          description="Updated user data",
+     *          @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="USUARIO_ID", type="integer", example=1),
+     *             @OA\Property(property="USUARIO_NOME", type="string", example="Username"),
+     *             @OA\Property(property="USUARIO_EMAIL", type="string", example="example@example.com"),
+     *             @OA\Property(property="USUARIO_CPF", type="string", example="12685963501")
+     *             
+     *         )
+     *     ),
+     *     @OA\Response(
+     *          response="401", 
+     *          description="Unauthorized",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(property="code", type="string", example="EXCPHAND001"),
+     *              @OA\Property(property="endpoint", type="string", example="api/user"),
+     *              @OA\Property(property="message", type="string", example="Token de acesso inválido.")
+     *         )
+     *     ),
+     *     security={{"bearerAuth":{}}}
+     * )
+     */
     public function update(Request $request, $id) {
         $request->validate(User::rulesUpdate());
 
@@ -45,14 +176,54 @@ class UserController extends Controller
         return response()->json($data, 200);
     }
 
+    /**
+     * @OA\Get(
+     *      path="/api/user/{id}",
+     *      tags={"User"},
+     *      summary="Get a user by ID",
+     *      @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="User ID",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *          response="200", 
+     *          description="User data",
+     *          @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="USUARIO_ID", type="integer", example=1),
+     *             @OA\Property(property="USUARIO_NOME", type="string", example="Username"),
+     *             @OA\Property(property="USUARIO_EMAIL", type="string", example="example@example.com"),
+     *             @OA\Property(property="USUARIO_CPF", type="string", example="12685963501")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *          response="401", 
+     *          description="Unauthorized",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(property="code", type="string", example="EXCPHAND001"),
+     *              @OA\Property(property="endpoint", type="string", example="api/user/1"),
+     *              @OA\Property(property="message", type="string", example="Token de acesso inválido.")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *          response="404", 
+     *          description="Record not found",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(property="code", type="string", example="EXCPHAND001"),
+     *              @OA\Property(property="endpoint", type="string", example="api/user/1"),
+     *              @OA\Property(property="message", type="string", example="Registro não encontrado.")
+     *         )
+     *     ),
+     *     security={{"bearerAuth":{}}}
+     * )
+     */
     public function show($id) {
-        $data = User::find($id);
-
-        if (!$data) {
-            throw new MasterNotFoundHttpException();
-        }
-
-        return response()->json($data, 200);
+        return parent::show($id);
     }
 
     public function adresses() {

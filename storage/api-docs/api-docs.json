@@ -14,6 +14,266 @@
         "version": "1.0.0"
     },
     "paths": {
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Log in",
+                "operationId": "a3b306d14572d1f4bd6c064b3233e7b8",
+                "requestBody": {
+                    "description": "Login details",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "USUARIO_EMAIL": {
+                                        "type": "string",
+                                        "example": "example@example.com"
+                                    },
+                                    "USUARIO_SENHA": {
+                                        "type": "string",
+                                        "example": "123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Token details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "access_token": {
+                                            "type": "string",
+                                            "example": "access_token_123"
+                                        },
+                                        "token_type": {
+                                            "type": "string",
+                                            "example": "bearer"
+                                        },
+                                        "expires_in": {
+                                            "type": "integer",
+                                            "example": 3600
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid credentials",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Credenciais inválidas."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/me": {
+            "get": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Logged in user data",
+                "operationId": "9d9bc556f927575aa492a88c28fe5908",
+                "responses": {
+                    "200": {
+                        "description": "User data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "USUARIO_ID": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "USUARIO_NOME": {
+                                            "type": "string",
+                                            "example": "Username"
+                                        },
+                                        "USUARIO_EMAIL": {
+                                            "type": "string",
+                                            "example": "example@example.com"
+                                        },
+                                        "USUARIO_CPF": {
+                                            "type": "string",
+                                            "example": "12685963501"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "string",
+                                            "example": "EXCPHAND001"
+                                        },
+                                        "endpoint": {
+                                            "type": "string",
+                                            "example": "api/me"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Token de acesso inválido."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/logout": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Logout",
+                "operationId": "fe8f3429cd6979b3b4517e186505f9f9",
+                "responses": {
+                    "200": {
+                        "description": "Logout",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "integer",
+                                            "example": "Logout efetuado com sucesso."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "string",
+                                            "example": "EXCPHAND001"
+                                        },
+                                        "endpoint": {
+                                            "type": "string",
+                                            "example": "api/logout"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Token de acesso inválido."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/refresh-token": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Refresh the access token",
+                "operationId": "41b109d150a67fd6df88cced4d491a6f",
+                "responses": {
+                    "200": {
+                        "description": "Token details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "access_token": {
+                                            "type": "string",
+                                            "example": "access_token_123"
+                                        },
+                                        "token_type": {
+                                            "type": "string",
+                                            "example": "bearer"
+                                        },
+                                        "expires_in": {
+                                            "type": "integer",
+                                            "example": 3600
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "string",
+                                            "example": "EXCPHAND001"
+                                        },
+                                        "endpoint": {
+                                            "type": "string",
+                                            "example": "api/refresh-token"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Token de acesso inválido."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/order-status": {
             "get": {
                 "tags": [
@@ -435,6 +695,391 @@
                                         "endpoint": {
                                             "type": "string",
                                             "example": "api/order-status/1"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Registro não encontrado."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/user": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "List all users",
+                "operationId": "971db9bc974c0e607288cfe7ecc10096",
+                "parameters": [
+                    {
+                        "name": "USUARIO_NOME",
+                        "in": "query",
+                        "description": "User name",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "USUARIO_EMAIL",
+                        "in": "query",
+                        "description": "User e-mail",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "USUARIO_CPF",
+                        "in": "query",
+                        "description": "User CPF",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User list",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "USUARIO_ID": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "USUARIO_NOME": {
+                                                "type": "string",
+                                                "example": "Username"
+                                            },
+                                            "USUARIO_EMAIL": {
+                                                "type": "string",
+                                                "example": "example@example.com"
+                                            },
+                                            "USUARIO_CPF": {
+                                                "type": "string",
+                                                "example": "12685963501"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "string",
+                                            "example": "EXCPHAND001"
+                                        },
+                                        "endpoint": {
+                                            "type": "string",
+                                            "example": "api/user"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Token de acesso inválido."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Update an user",
+                "operationId": "fd4f39f7820d3f3cbc259c5b30fed830",
+                "requestBody": {
+                    "description": "Data for update user",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "USUARIO_NOME": {
+                                        "type": "string",
+                                        "example": "Username"
+                                    },
+                                    "USUARIO_EMAIL": {
+                                        "type": "string",
+                                        "example": "example@example.com"
+                                    },
+                                    "USUARIO_SENHA": {
+                                        "type": "string",
+                                        "example": "123"
+                                    },
+                                    "USUARIO_CPF": {
+                                        "type": "string",
+                                        "example": "12685963501"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated user data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "USUARIO_ID": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "USUARIO_NOME": {
+                                            "type": "string",
+                                            "example": "Username"
+                                        },
+                                        "USUARIO_EMAIL": {
+                                            "type": "string",
+                                            "example": "example@example.com"
+                                        },
+                                        "USUARIO_CPF": {
+                                            "type": "string",
+                                            "example": "12685963501"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "string",
+                                            "example": "EXCPHAND001"
+                                        },
+                                        "endpoint": {
+                                            "type": "string",
+                                            "example": "api/user"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Token de acesso inválido."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Registers an user",
+                "operationId": "089999749fbdec98922de2f74ba8d540",
+                "requestBody": {
+                    "description": "Data for creating a new user",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "USUARIO_NOME": {
+                                        "type": "string",
+                                        "example": "Username"
+                                    },
+                                    "USUARIO_EMAIL": {
+                                        "type": "string",
+                                        "example": "example@example.com"
+                                    },
+                                    "USUARIO_SENHA": {
+                                        "type": "string",
+                                        "example": "123"
+                                    },
+                                    "USUARIO_CPF": {
+                                        "type": "string",
+                                        "example": "12685963501"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Registered user data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "USUARIO_ID": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "USUARIO_NOME": {
+                                            "type": "string",
+                                            "example": "Username"
+                                        },
+                                        "USUARIO_EMAIL": {
+                                            "type": "string",
+                                            "example": "example@example.com"
+                                        },
+                                        "USUARIO_CPF": {
+                                            "type": "string",
+                                            "example": "12685963501"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "string",
+                                            "example": "EXCPHAND001"
+                                        },
+                                        "endpoint": {
+                                            "type": "string",
+                                            "example": "api/user"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Token de acesso inválido."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user/{id}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get a user by ID",
+                "operationId": "d8f696420bea235f4916124c9ba1c507",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "USUARIO_ID": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "USUARIO_NOME": {
+                                            "type": "string",
+                                            "example": "Username"
+                                        },
+                                        "USUARIO_EMAIL": {
+                                            "type": "string",
+                                            "example": "example@example.com"
+                                        },
+                                        "USUARIO_CPF": {
+                                            "type": "string",
+                                            "example": "12685963501"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "string",
+                                            "example": "EXCPHAND001"
+                                        },
+                                        "endpoint": {
+                                            "type": "string",
+                                            "example": "api/user/1"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Token de acesso inválido."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Record not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "string",
+                                            "example": "EXCPHAND001"
+                                        },
+                                        "endpoint": {
+                                            "type": "string",
+                                            "example": "api/user/1"
                                         },
                                         "message": {
                                             "type": "string",

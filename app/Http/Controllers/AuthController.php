@@ -8,8 +8,42 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
-    public function login(Request $request)
-    {
+    /**
+     * @OA\Post(
+     *      path="/api/login",
+     *      tags={"Authentication"},
+     *      summary="Log in",
+     *      @OA\RequestBody(
+     *         required=true,
+     *         description="Login details",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="USUARIO_EMAIL", type="string", example="example@example.com"),
+     *             @OA\Property(property="USUARIO_SENHA", type="string", example="123")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *          response="200", 
+     *          description="Token details",
+     *          @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="access_token", type="string", example="access_token_123"),
+     *             @OA\Property(property="token_type", type="string", example="bearer"),
+     *             @OA\Property(property="expires_in", type="integer", example=3600)
+     *             
+     *         )
+     *     ),
+     *     @OA\Response(
+     *          response="401", 
+     *          description="Invalid credentials",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(property="message", type="string", example="Credenciais inválidas.")
+     *         )
+     *     )
+     * )
+     */
+    public function login(Request $request) {
         $credentials = [
             'USUARIO_EMAIL' => $request->USUARIO_EMAIL, // Campo personalizado para o email
             'password' =>$request->USUARIO_SENHA, // Campo padrão para a senha
@@ -22,25 +56,105 @@ class AuthController extends Controller
         return $this->respondWithToken($token);
     }
 
-    public function me()
-    {
+    /**
+     * @OA\Get(
+     *     path="/api/me",
+     *     tags={"Authentication"},
+     *     summary="Logged in user data",
+     *     @OA\Response(
+     *          response="200", 
+     *          description="User data",
+     *          @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="USUARIO_ID", type="integer", example=1),
+     *             @OA\Property(property="USUARIO_NOME", type="string", example="Username"),
+     *             @OA\Property(property="USUARIO_EMAIL", type="string", example="example@example.com"),
+     *             @OA\Property(property="USUARIO_CPF", type="string", example="12685963501")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *          response="401", 
+     *          description="Unauthorized",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(property="code", type="string", example="EXCPHAND001"),
+     *              @OA\Property(property="endpoint", type="string", example="api/me"),
+     *              @OA\Property(property="message", type="string", example="Token de acesso inválido.")
+     *         )
+     *     ),
+     *     security={{"bearerAuth":{}}}
+     * )
+     */
+    public function me() {
         return response()->json(auth()->user());
     }
 
-    public function logout()
-    {
+    /**
+     * @OA\Post(
+     *     path="/api/logout",
+     *     tags={"Authentication"},
+     *     summary="Logout",
+     *     @OA\Response(
+     *          response="200", 
+     *          description="Logout",
+     *          @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="message", type="integer", example="Logout efetuado com sucesso.")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *          response="401", 
+     *          description="Unauthorized",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(property="code", type="string", example="EXCPHAND001"),
+     *              @OA\Property(property="endpoint", type="string", example="api/logout"),
+     *              @OA\Property(property="message", type="string", example="Token de acesso inválido.")
+     *         )
+     *     ),
+     *     security={{"bearerAuth":{}}}
+     * )
+     */
+    public function logout() {
         auth()->logout();
 
         return response()->json(['message' => 'Logout efetuado com sucesso.']);
     }
 
-    public function refresh()
-    {
+    /**
+     * @OA\Post(
+     *     path="/api/refresh-token",
+     *     tags={"Authentication"},
+     *     summary="Refresh the access token",
+     *     @OA\Response(
+     *          response="200", 
+     *          description="Token details",
+     *          @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="access_token", type="string", example="access_token_123"),
+     *             @OA\Property(property="token_type", type="string", example="bearer"),
+     *             @OA\Property(property="expires_in", type="integer", example=3600)
+     *             
+     *         )
+     *     ),
+     *     @OA\Response(
+     *          response="401", 
+     *          description="Unauthorized",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(property="code", type="string", example="EXCPHAND001"),
+     *              @OA\Property(property="endpoint", type="string", example="api/refresh-token"),
+     *              @OA\Property(property="message", type="string", example="Token de acesso inválido.")
+     *         )
+     *     ),
+     *     security={{"bearerAuth":{}}}
+     * )
+     */
+    public function refresh() {
         return $this->respondWithToken(auth()->refresh());
     }
 
-    protected function respondWithToken($token)
-    {
+    protected function respondWithToken($token) {
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
