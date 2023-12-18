@@ -5,6 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @OA\Schema(
+ *      schema="Product",
+ *      @OA\Property(property="PRODUTO_ID", type="integer", example=1),
+ *      @OA\Property(property="PRODUTO_NOME", type="string", example="Nome"),
+ *      @OA\Property(property="PRODUTO_DESC", type="string", example="Descrição do produto"),
+ *      @OA\Property(property="PRODUTO_PRECO", type="number", format="float", maximum=999.99, minimum=0),
+ *      @OA\Property(property="PRODUTO_DESCONTO", type="number", format="float", maximum=999.99, minimum=0),
+ *      @OA\Property(property="PRODUTO_ATIVO", type="integer", maximum=1, minimum=0),
+ *      @OA\Property(property="CATEGORIA_ID", type="integer")
+ * )
+ */
 class Product extends Model
 {
     use HasFactory;

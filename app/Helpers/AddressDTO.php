@@ -2,6 +2,16 @@
 
 namespace App\Helpers;
 
+/**
+ * @OA\Schema(
+ *      schema="AddressDTO",
+ *      @OA\Property(property="cep", type="string", example="01001000"),
+ *      @OA\Property(property="logradouro", type="string", example="Praça da Sé"),
+ *      @OA\Property(property="bairro", type="string", example="Sé"),
+ *      @OA\Property(property="cidade", type="string", example="São Paulo"),
+ *      @OA\Property(property="uf", type="string", example="SP")
+ * )
+ */
 class AddressDTO 
 {
     private $cep;

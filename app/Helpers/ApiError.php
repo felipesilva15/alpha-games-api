@@ -2,6 +2,14 @@
 
 namespace App\Helpers;
 
+/**
+ * @OA\Schema(
+ *      schema="ApiError",
+ *      @OA\Property(property="code", type="string", example="EXCPHAND001"),
+ *      @OA\Property(property="endpoint", type="string", example="api/endpoint"),
+ *      @OA\Property(property="message", type="string", example="Ocorreu um erro.")
+ * )
+ */
 class ApiError
 {
     private $code;

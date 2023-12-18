@@ -299,17 +299,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "properties": {
-                                            "STATUS_ID": {
-                                                "type": "integer",
-                                                "example": 1
-                                            },
-                                            "STATUS_DESC": {
-                                                "type": "string",
-                                                "example": "Em andamento"
-                                            }
-                                        },
-                                        "type": "object"
+                                        "$ref": "#/components/schemas/OrderStatus"
                                     }
                                 }
                             }
@@ -1098,9 +1088,479 @@
                     }
                 ]
             }
+        },
+        "/api/user/adresses": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "List all user adresses",
+                "operationId": "086b88b73e8103220e07b94b4b4f12dd",
+                "responses": {
+                    "200": {
+                        "description": "User adresses list",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "ENDERECO_ID": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "USUARIO_ID": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "ENDERECO_NOME": {
+                                                "type": "string",
+                                                "example": "Casa"
+                                            },
+                                            "ENDERECO_LOGRADOURO": {
+                                                "type": "string",
+                                                "example": "Praça da Sé"
+                                            },
+                                            "ENDERECO_NUMERO": {
+                                                "type": "string",
+                                                "example": "2589"
+                                            },
+                                            "ENDERECO_COMPLEMENTO": {
+                                                "type": "string",
+                                                "example": "1º Andar, Apto 4"
+                                            },
+                                            "ENDERECO_CEP": {
+                                                "type": "string",
+                                                "example": "01001000"
+                                            },
+                                            "ENDERECO_CIDADE": {
+                                                "type": "string",
+                                                "example": "São Paulo"
+                                            },
+                                            "USUARIO_EENDERECO_ESTADOMAIL": {
+                                                "type": "string",
+                                                "example": "SP"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "string",
+                                            "example": "EXCPHAND001"
+                                        },
+                                        "endpoint": {
+                                            "type": "string",
+                                            "example": "api/user/adresses"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Token de acesso inválido."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/user/orders": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "List all user orders",
+                "operationId": "75bd13636229da163281953ad39b5b79",
+                "responses": {
+                    "200": {
+                        "description": "User orders list",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "PEDIDO_ID": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "USUARIO_ID": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "ENDERECO_ID": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "STATUS_ID": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "PEDIDO_DATA": {
+                                                "type": "string",
+                                                "format": "date-time",
+                                                "example": "2023-11-27T03:00:00.000000Z"
+                                            },
+                                            "status": {
+                                                "properties": {
+                                                    "STATUS_ID": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "ENDERECO_CEP": {
+                                                "type": "string",
+                                                "example": "01001000"
+                                            },
+                                            "ENDERECO_CIDADE": {
+                                                "type": "string",
+                                                "example": "São Paulo"
+                                            },
+                                            "USUARIO_EENDERECO_ESTADOMAIL": {
+                                                "type": "string",
+                                                "example": "SP"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "string",
+                                            "example": "EXCPHAND001"
+                                        },
+                                        "endpoint": {
+                                            "type": "string",
+                                            "example": "api/user/orders"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Token de acesso inválido."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {
+        "schemas": {
+            "AddressDTO": {
+                "properties": {
+                    "cep": {
+                        "type": "string",
+                        "example": "01001000"
+                    },
+                    "logradouro": {
+                        "type": "string",
+                        "example": "Praça da Sé"
+                    },
+                    "bairro": {
+                        "type": "string",
+                        "example": "Sé"
+                    },
+                    "cidade": {
+                        "type": "string",
+                        "example": "São Paulo"
+                    },
+                    "uf": {
+                        "type": "string",
+                        "example": "SP"
+                    }
+                },
+                "type": "object"
+            },
+            "ApiError": {
+                "properties": {
+                    "code": {
+                        "type": "string",
+                        "example": "EXCPHAND001"
+                    },
+                    "endpoint": {
+                        "type": "string",
+                        "example": "api/endpoint"
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "Ocorreu um erro."
+                    }
+                },
+                "type": "object"
+            },
+            "Address": {
+                "properties": {
+                    "ENDERECO_ID": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "ENDERECO_NOME": {
+                        "type": "string",
+                        "example": "Casa"
+                    },
+                    "ENDERECO_CEP": {
+                        "type": "string",
+                        "example": "01001000"
+                    },
+                    "ENDERECO_LOGRADOURO": {
+                        "type": "string",
+                        "example": "Praça da Sé"
+                    },
+                    "ENDERECO_NUMERO": {
+                        "type": "string",
+                        "example": "2589"
+                    },
+                    "ENDERECO_COMPLEMENTO": {
+                        "type": "string",
+                        "example": "1º Andar, Apto 4"
+                    },
+                    "ENDERECO_CIDADE": {
+                        "type": "string",
+                        "example": "São Paulo"
+                    },
+                    "ENDERECO_ESTADO": {
+                        "type": "string",
+                        "example": "SP"
+                    },
+                    "USUARIO_ID": {
+                        "type": "integer",
+                        "example": 1
+                    }
+                },
+                "type": "object"
+            },
+            "CartItem": {
+                "properties": {
+                    "USUARIO_ID": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "PRODUTO_ID": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "ITEM_QTD": {
+                        "type": "integer",
+                        "example": 2
+                    }
+                },
+                "type": "object"
+            },
+            "Category": {
+                "properties": {
+                    "CATEGORIA_ID": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "CATEGORIA_NOME": {
+                        "type": "integer",
+                        "example": "Nome"
+                    },
+                    "CATEGORIA_DESC": {
+                        "type": "integer",
+                        "example": "Descrição da categoria"
+                    },
+                    "CATEGORIA_ATIVO": {
+                        "type": "integer",
+                        "maximum": 1,
+                        "minimum": 0
+                    }
+                },
+                "type": "object"
+            },
+            "Order": {
+                "properties": {
+                    "PEDIDO_ID": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "USUARIO_ID": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "STATUS_ID": {
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "PEDIDO_DATA": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-11-27T03:00:00.000000Z"
+                    },
+                    "ENDERECO_ID": {
+                        "type": "integer",
+                        "example": 1
+                    }
+                },
+                "type": "object"
+            },
+            "OrderItem": {
+                "properties": {
+                    "PEDIDO_ID": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "PRODUTO_ID": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "ITEM_PRECO": {
+                        "type": "number",
+                        "format": "float",
+                        "maximum": 999.99,
+                        "minimum": 0
+                    },
+                    "ITEM_QTD": {
+                        "type": "integer",
+                        "example": 20
+                    }
+                },
+                "type": "object"
+            },
+            "OrderStatus": {
+                "properties": {
+                    "STATUS_ID": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "STATUS_DESC": {
+                        "type": "string",
+                        "example": "Em andamento"
+                    }
+                },
+                "type": "object"
+            },
+            "Product": {
+                "properties": {
+                    "PRODUTO_ID": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "PRODUTO_NOME": {
+                        "type": "string",
+                        "example": "Nome"
+                    },
+                    "PRODUTO_DESC": {
+                        "type": "string",
+                        "example": "Descrição do produto"
+                    },
+                    "PRODUTO_PRECO": {
+                        "type": "number",
+                        "format": "float",
+                        "maximum": 999.99,
+                        "minimum": 0
+                    },
+                    "PRODUTO_DESCONTO": {
+                        "type": "number",
+                        "format": "float",
+                        "maximum": 999.99,
+                        "minimum": 0
+                    },
+                    "PRODUTO_ATIVO": {
+                        "type": "integer",
+                        "maximum": 1,
+                        "minimum": 0
+                    },
+                    "CATEGORIA_ID": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "ProductImage": {
+                "properties": {
+                    "IMAGEM_ID": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "IMAGEM_ORDEM": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "PRODUTO_ID": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "IMAGEM_URL": {
+                        "type": "string",
+                        "example": "https://www.google.com.br/image"
+                    }
+                },
+                "type": "object"
+            },
+            "ProductStock": {
+                "properties": {
+                    "PRODUTO_ID": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "PRODUTO_QTD": {
+                        "type": "integer",
+                        "example": 20
+                    }
+                },
+                "type": "object"
+            },
+            "User": {
+                "properties": {
+                    "USUARIO_ID": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "USUARIO_NOME": {
+                        "type": "string",
+                        "example": "Username"
+                    },
+                    "USUARIO_EMAIL": {
+                        "type": "string",
+                        "example": "example@example.com"
+                    },
+                    "USUARIO_SENHA": {
+                        "type": "string",
+                        "example": "123"
+                    },
+                    "USUARIO_CPF": {
+                        "type": "string",
+                        "example": "12685963501"
+                    }
+                },
+                "type": "object"
+            }
+        },
         "securitySchemes": {
             "bearerAuth": {
                 "type": "apiKey",

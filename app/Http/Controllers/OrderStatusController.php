@@ -28,11 +28,7 @@ class OrderStatusController extends Controller
      *          description="Order status list",
      *          @OA\JsonContent(
      *             type="array",
-     *             @OA\Items(
-     *                 type="object",
-     *                 @OA\Property(property="STATUS_ID", type="integer", example=1),
-     *                 @OA\Property(property="STATUS_DESC", type="string", example="Em andamento")
-     *             )
+     *             @OA\Items(ref="#/components/schemas/OrderStatus")
      *         )
      *     ),
      *     @OA\Response(

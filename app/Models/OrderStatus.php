@@ -5,6 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @OA\Schema(
+ *     schema="OrderStatus",
+ *     @OA\Property(property="STATUS_ID", type="integer", example=1),
+ *     @OA\Property(property="STATUS_DESC", type="string", example="Em andamento")
+ * )
+ */
 class OrderStatus extends Model
 {
     use HasFactory;

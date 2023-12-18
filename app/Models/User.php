@@ -8,6 +8,16 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
+/**
+ * @OA\Schema(
+ *      schema="User",
+ *      @OA\Property(property="USUARIO_ID", type="integer", example=1),
+ *      @OA\Property(property="USUARIO_NOME", type="string", example="Username"),
+ *      @OA\Property(property="USUARIO_EMAIL", type="string", example="example@example.com"),
+ *      @OA\Property(property="USUARIO_SENHA", type="string", example="123"),
+ *      @OA\Property(property="USUARIO_CPF", type="string", example="12685963501")
+ * )
+ */
 class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;

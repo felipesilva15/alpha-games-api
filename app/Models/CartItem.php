@@ -5,6 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @OA\Schema(
+ *      schema="CartItem",
+ *      @OA\Property(property="USUARIO_ID", type="integer", example=1),
+ *      @OA\Property(property="PRODUTO_ID", type="integer", example=1),
+ *      @OA\Property(property="ITEM_QTD", type="integer", example=2)
+ * )
+ */
 class CartItem extends Model
 {
     use HasFactory;

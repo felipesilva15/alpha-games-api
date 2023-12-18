@@ -226,6 +226,43 @@ class UserController extends Controller
         return parent::show($id);
     }
 
+    /**
+     * @OA\Get(
+     *      path="/api/user/adresses",
+     *      tags={"User"},
+     *      summary="List all user adresses",
+     *      @OA\Response(
+     *          response="200", 
+     *          description="User adresses list",
+     *          @OA\JsonContent(
+     *             type="array",
+     *             @OA\Items(
+     *                  type="object",
+     *                  @OA\Property(property="ENDERECO_ID", type="integer", example=1),
+     *                  @OA\Property(property="USUARIO_ID", type="integer", example=1),
+     *                  @OA\Property(property="ENDERECO_NOME", type="string", example="Casa"),
+     *                  @OA\Property(property="ENDERECO_LOGRADOURO", type="string", example="Praça da Sé"),
+     *                  @OA\Property(property="ENDERECO_NUMERO", type="string", example="2589"),
+     *                  @OA\Property(property="ENDERECO_COMPLEMENTO", type="string", example="1º Andar, Apto 4"),
+     *                  @OA\Property(property="ENDERECO_CEP", type="string", example="01001000"),
+     *                  @OA\Property(property="ENDERECO_CIDADE", type="string", example="São Paulo"),
+     *                  @OA\Property(property="USUARIO_EENDERECO_ESTADOMAIL", type="string", example="SP"),
+     *         )
+     *         )
+     *      ),
+     *      @OA\Response(
+     *          response="401", 
+     *          description="Unauthorized",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(property="code", type="string", example="EXCPHAND001"),
+     *              @OA\Property(property="endpoint", type="string", example="api/user/adresses"),
+     *              @OA\Property(property="message", type="string", example="Token de acesso inválido.")
+     *         )
+     *      ),
+     *      security={{"bearerAuth":{}}}
+     * )
+     */
     public function adresses() {
         return response()->json(Auth::user()->adresses()->get(), 200);
     }
@@ -240,6 +277,47 @@ class UserController extends Controller
         return response()->json($data, 200);
     }
 
+    /**
+     * @OA\Get(
+     *      path="/api/user/orders",
+     *      tags={"User"},
+     *      summary="List all user orders",
+     *      @OA\Response(
+     *          response="200", 
+     *          description="User orders list",
+     *          @OA\JsonContent(
+     *             type="array",
+     *             @OA\Items(
+     *                  type="object",
+     *                  @OA\Property(property="PEDIDO_ID", type="integer", example=1),
+     *                  @OA\Property(property="USUARIO_ID", type="integer", example=1),
+     *                  @OA\Property(property="ENDERECO_ID", type="integer", example=1),
+     *                  @OA\Property(property="STATUS_ID", type="integer", example=1),
+     *                  @OA\Property(property="PEDIDO_DATA", type="string", format="date-time", example="2023-11-27T03:00:00.000000Z"),
+     *                  @OA\Property(
+     *                      property="status", 
+     *                      type="object", 
+     *                      @OA\Property(property="STATUS_ID", type="integer", example=1)
+     *                  ),
+     *                  @OA\Property(property="ENDERECO_CEP", type="string", example="01001000"),
+     *                  @OA\Property(property="ENDERECO_CIDADE", type="string", example="São Paulo"),
+     *                  @OA\Property(property="USUARIO_EENDERECO_ESTADOMAIL", type="string", example="SP"),
+     *         )
+     *         )
+     *      ),
+     *      @OA\Response(
+     *          response="401", 
+     *          description="Unauthorized",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(property="code", type="string", example="EXCPHAND001"),
+     *              @OA\Property(property="endpoint", type="string", example="api/user/orders"),
+     *              @OA\Property(property="message", type="string", example="Token de acesso inválido.")
+     *         )
+     *      ),
+     *      security={{"bearerAuth":{}}}
+     * )
+     */
     public function orders() {
         $data = Auth::user()
                     ->orders()
