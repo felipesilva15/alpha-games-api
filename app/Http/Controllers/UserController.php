@@ -49,18 +49,13 @@ class UserController extends Controller
      *                  @OA\Property(property="USUARIO_NOME", type="string", example="Username"),
      *                  @OA\Property(property="USUARIO_EMAIL", type="string", example="example@example.com"),
      *                  @OA\Property(property="USUARIO_CPF", type="string", example="12685963501")
-     *         )
+     *              )
      *         )
      *     ),
      *     @OA\Response(
      *          response="401", 
      *          description="Unauthorized",
-     *          @OA\JsonContent(
-     *              type="object",
-     *              @OA\Property(property="code", type="string", example="EXCPHAND001"),
-     *              @OA\Property(property="endpoint", type="string", example="api/user"),
-     *              @OA\Property(property="message", type="string", example="Token de acesso inválido.")
-     *         )
+     *          @OA\JsonContent(ref="#/components/schemas/ApiError")
      *     ),
      *     security={{"bearerAuth":{}}}
      * )
@@ -94,18 +89,12 @@ class UserController extends Controller
      *             @OA\Property(property="USUARIO_NOME", type="string", example="Username"),
      *             @OA\Property(property="USUARIO_EMAIL", type="string", example="example@example.com"),
      *             @OA\Property(property="USUARIO_CPF", type="string", example="12685963501")
-     *             
      *         )
      *     ),
      *     @OA\Response(
      *          response="401", 
      *          description="Unauthorized",
-     *          @OA\JsonContent(
-     *              type="object",
-     *              @OA\Property(property="code", type="string", example="EXCPHAND001"),
-     *              @OA\Property(property="endpoint", type="string", example="api/user"),
-     *              @OA\Property(property="message", type="string", example="Token de acesso inválido.")
-     *         )
+     *          @OA\JsonContent(ref="#/components/schemas/ApiError")
      *     )
      * )
      */
@@ -147,18 +136,12 @@ class UserController extends Controller
      *             @OA\Property(property="USUARIO_NOME", type="string", example="Username"),
      *             @OA\Property(property="USUARIO_EMAIL", type="string", example="example@example.com"),
      *             @OA\Property(property="USUARIO_CPF", type="string", example="12685963501")
-     *             
      *         )
      *     ),
      *     @OA\Response(
      *          response="401", 
      *          description="Unauthorized",
-     *          @OA\JsonContent(
-     *              type="object",
-     *              @OA\Property(property="code", type="string", example="EXCPHAND001"),
-     *              @OA\Property(property="endpoint", type="string", example="api/user"),
-     *              @OA\Property(property="message", type="string", example="Token de acesso inválido.")
-     *         )
+     *          @OA\JsonContent(ref="#/components/schemas/ApiError")
      *     ),
      *     security={{"bearerAuth":{}}}
      * )
@@ -202,22 +185,12 @@ class UserController extends Controller
      *     @OA\Response(
      *          response="401", 
      *          description="Unauthorized",
-     *          @OA\JsonContent(
-     *              type="object",
-     *              @OA\Property(property="code", type="string", example="EXCPHAND001"),
-     *              @OA\Property(property="endpoint", type="string", example="api/user/1"),
-     *              @OA\Property(property="message", type="string", example="Token de acesso inválido.")
-     *         )
+     *          @OA\JsonContent(ref="#/components/schemas/ApiError")
      *     ),
      *     @OA\Response(
      *          response="404", 
      *          description="Record not found",
-     *          @OA\JsonContent(
-     *              type="object",
-     *              @OA\Property(property="code", type="string", example="EXCPHAND001"),
-     *              @OA\Property(property="endpoint", type="string", example="api/user/1"),
-     *              @OA\Property(property="message", type="string", example="Registro não encontrado.")
-     *         )
+     *          @OA\JsonContent(ref="#/components/schemas/ApiError")
      *     ),
      *     security={{"bearerAuth":{}}}
      * )
@@ -236,29 +209,13 @@ class UserController extends Controller
      *          description="User adresses list",
      *          @OA\JsonContent(
      *             type="array",
-     *             @OA\Items(
-     *                  type="object",
-     *                  @OA\Property(property="ENDERECO_ID", type="integer", example=1),
-     *                  @OA\Property(property="USUARIO_ID", type="integer", example=1),
-     *                  @OA\Property(property="ENDERECO_NOME", type="string", example="Casa"),
-     *                  @OA\Property(property="ENDERECO_LOGRADOURO", type="string", example="Praça da Sé"),
-     *                  @OA\Property(property="ENDERECO_NUMERO", type="string", example="2589"),
-     *                  @OA\Property(property="ENDERECO_COMPLEMENTO", type="string", example="1º Andar, Apto 4"),
-     *                  @OA\Property(property="ENDERECO_CEP", type="string", example="01001000"),
-     *                  @OA\Property(property="ENDERECO_CIDADE", type="string", example="São Paulo"),
-     *                  @OA\Property(property="USUARIO_EENDERECO_ESTADOMAIL", type="string", example="SP"),
-     *         )
+     *             @OA\Items(ref="#/components/schemas/Address")
      *         )
      *      ),
      *      @OA\Response(
      *          response="401", 
      *          description="Unauthorized",
-     *          @OA\JsonContent(
-     *              type="object",
-     *              @OA\Property(property="code", type="string", example="EXCPHAND001"),
-     *              @OA\Property(property="endpoint", type="string", example="api/user/adresses"),
-     *              @OA\Property(property="message", type="string", example="Token de acesso inválido.")
-     *         )
+     *          @OA\JsonContent(ref="#/components/schemas/ApiError")
      *      ),
      *      security={{"bearerAuth":{}}}
      * )
@@ -287,33 +244,13 @@ class UserController extends Controller
      *          description="User orders list",
      *          @OA\JsonContent(
      *             type="array",
-     *             @OA\Items(
-     *                  type="object",
-     *                  @OA\Property(property="PEDIDO_ID", type="integer", example=1),
-     *                  @OA\Property(property="USUARIO_ID", type="integer", example=1),
-     *                  @OA\Property(property="ENDERECO_ID", type="integer", example=1),
-     *                  @OA\Property(property="STATUS_ID", type="integer", example=1),
-     *                  @OA\Property(property="PEDIDO_DATA", type="string", format="date-time", example="2023-11-27T03:00:00.000000Z"),
-     *                  @OA\Property(
-     *                      property="status", 
-     *                      type="object", 
-     *                      @OA\Property(property="STATUS_ID", type="integer", example=1)
-     *                  ),
-     *                  @OA\Property(property="ENDERECO_CEP", type="string", example="01001000"),
-     *                  @OA\Property(property="ENDERECO_CIDADE", type="string", example="São Paulo"),
-     *                  @OA\Property(property="USUARIO_EENDERECO_ESTADOMAIL", type="string", example="SP"),
-     *         )
-     *         )
+     *             @OA\Items(ref="#/components/schemas/OrderDTO")
+     *          )
      *      ),
      *      @OA\Response(
      *          response="401", 
      *          description="Unauthorized",
-     *          @OA\JsonContent(
-     *              type="object",
-     *              @OA\Property(property="code", type="string", example="EXCPHAND001"),
-     *              @OA\Property(property="endpoint", type="string", example="api/user/orders"),
-     *              @OA\Property(property="message", type="string", example="Token de acesso inválido.")
-     *         )
+     *          @OA\JsonContent(ref="#/components/schemas/ApiError")
      *      ),
      *      security={{"bearerAuth":{}}}
      * )

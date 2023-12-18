@@ -34,12 +34,7 @@ class OrderStatusController extends Controller
      *     @OA\Response(
      *          response="401", 
      *          description="Unauthorized",
-     *          @OA\JsonContent(
-     *              type="object",
-     *              @OA\Property(property="code", type="string", example="EXCPHAND001"),
-     *              @OA\Property(property="endpoint", type="string", example="api/order-status"),
-     *              @OA\Property(property="message", type="string", example="Token de acesso inválido.")
-     *         )
+     *          @OA\JsonContent(ref="#/components/schemas/ApiError")
      *     ),
      *     security={{"bearerAuth":{}}}
      * )
@@ -72,22 +67,12 @@ class OrderStatusController extends Controller
      *     @OA\Response(
      *          response="401", 
      *          description="Unauthorized",
-     *          @OA\JsonContent(
-     *              type="object",
-     *              @OA\Property(property="code", type="string", example="EXCPHAND001"),
-     *              @OA\Property(property="endpoint", type="string", example="api/order-status/1"),
-     *              @OA\Property(property="message", type="string", example="Token de acesso inválido.")
-     *         )
+     *          @OA\JsonContent(ref="#/components/schemas/ApiError")
      *     ),
      *     @OA\Response(
      *          response="404", 
      *          description="Record not found",
-     *          @OA\JsonContent(
-     *              type="object",
-     *              @OA\Property(property="code", type="string", example="EXCPHAND001"),
-     *              @OA\Property(property="endpoint", type="string", example="api/order-status/1"),
-     *              @OA\Property(property="message", type="string", example="Registro não encontrado.")
-     *         )
+     *          @OA\JsonContent(ref="#/components/schemas/ApiError")
      *     ),
      *     security={{"bearerAuth":{}}}
      * )
@@ -122,12 +107,7 @@ class OrderStatusController extends Controller
      *     @OA\Response(
      *          response="401", 
      *          description="Unauthorized",
-     *          @OA\JsonContent(
-     *              type="object",
-     *              @OA\Property(property="code", type="string", example="EXCPHAND001"),
-     *              @OA\Property(property="endpoint", type="string", example="api/order-status"),
-     *              @OA\Property(property="message", type="string", example="Token de acesso inválido.")
-     *         )
+     *          @OA\JsonContent(ref="#/components/schemas/ApiError")
      *     ),
      *     security={{"bearerAuth":{}}}
      * )
@@ -163,28 +143,17 @@ class OrderStatusController extends Controller
      *             type="object",
      *             @OA\Property(property="STATUS_ID", type="integer", example=1),
      *             @OA\Property(property="STATUS_DESC", type="string", example="Em andamento")
-     *             
      *         )
      *     ),
      *     @OA\Response(
      *          response="401", 
      *          description="Unauthorized",
-     *          @OA\JsonContent(
-     *              type="object",
-     *              @OA\Property(property="code", type="string", example="EXCPHAND001"),
-     *              @OA\Property(property="endpoint", type="string", example="api/order-status/1"),
-     *              @OA\Property(property="message", type="string", example="Token de acesso inválido.")
-     *         )
+     *          @OA\JsonContent(ref="#/components/schemas/ApiError")
      *     ),
      *     @OA\Response(
      *          response="404", 
      *          description="RRecord not found",
-     *          @OA\JsonContent(
-     *              type="object",
-     *              @OA\Property(property="code", type="string", example="EXCPHAND001"),
-     *              @OA\Property(property="endpoint", type="string", example="api/order-status/1"),
-     *              @OA\Property(property="message", type="string", example="Registro não encontrado.")
-     *         )
+     *          @OA\JsonContent(ref="#/components/schemas/ApiError")
      *     ),
      *     security={{"bearerAuth":{}}}
      * )
@@ -211,28 +180,17 @@ class OrderStatusController extends Controller
      *          @OA\JsonContent(
      *             type="object",
      *             @OA\Property(property="message", type="string", example="Registro deletado com sucesso!")
-     *             
      *         )
      *     ),
      *     @OA\Response(
      *          response="401", 
      *          description="Unauthorized",
-     *          @OA\JsonContent(
-     *              type="object",
-     *              @OA\Property(property="code", type="string", example="EXCPHAND001"),
-     *              @OA\Property(property="endpoint", type="string", example="api/order-status/1"),
-     *              @OA\Property(property="message", type="string", example="Token de acesso inválido.")
-     *         )
+     *          @OA\JsonContent(ref="#/components/schemas/ApiError")
      *     ),
      *     @OA\Response(
      *          response="404", 
      *          description="Record not found",
-     *          @OA\JsonContent(
-     *              type="object",
-     *              @OA\Property(property="code", type="string", example="EXCPHAND001"),
-     *              @OA\Property(property="endpoint", type="string", example="api/order-status/1"),
-     *              @OA\Property(property="message", type="string", example="Registro não encontrado.")
-     *         )
+     *          @OA\JsonContent(ref="#/components/schemas/ApiError")
      *     ),
      *     security={{"bearerAuth":{}}}
      * )

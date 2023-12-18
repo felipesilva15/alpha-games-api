@@ -127,21 +127,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "code": {
-                                            "type": "string",
-                                            "example": "EXCPHAND001"
-                                        },
-                                        "endpoint": {
-                                            "type": "string",
-                                            "example": "api/me"
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Token de acesso inválido."
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/ApiError"
                                 }
                             }
                         }
@@ -183,21 +169,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "code": {
-                                            "type": "string",
-                                            "example": "EXCPHAND001"
-                                        },
-                                        "endpoint": {
-                                            "type": "string",
-                                            "example": "api/logout"
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Token de acesso inválido."
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/ApiError"
                                 }
                             }
                         }
@@ -247,21 +219,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "code": {
-                                            "type": "string",
-                                            "example": "EXCPHAND001"
-                                        },
-                                        "endpoint": {
-                                            "type": "string",
-                                            "example": "api/refresh-token"
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Token de acesso inválido."
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/ApiError"
                                 }
                             }
                         }
@@ -310,21 +268,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "code": {
-                                            "type": "string",
-                                            "example": "EXCPHAND001"
-                                        },
-                                        "endpoint": {
-                                            "type": "string",
-                                            "example": "api/order-status"
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Token de acesso inválido."
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/ApiError"
                                 }
                             }
                         }
@@ -384,21 +328,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "code": {
-                                            "type": "string",
-                                            "example": "EXCPHAND001"
-                                        },
-                                        "endpoint": {
-                                            "type": "string",
-                                            "example": "api/order-status"
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Token de acesso inválido."
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/ApiError"
                                 }
                             }
                         }
@@ -455,21 +385,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "code": {
-                                            "type": "string",
-                                            "example": "EXCPHAND001"
-                                        },
-                                        "endpoint": {
-                                            "type": "string",
-                                            "example": "api/order-status/1"
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Token de acesso inválido."
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/ApiError"
                                 }
                             }
                         }
@@ -479,21 +395,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "code": {
-                                            "type": "string",
-                                            "example": "EXCPHAND001"
-                                        },
-                                        "endpoint": {
-                                            "type": "string",
-                                            "example": "api/order-status/1"
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Registro não encontrado."
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/ApiError"
                                 }
                             }
                         }
@@ -564,21 +466,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "code": {
-                                            "type": "string",
-                                            "example": "EXCPHAND001"
-                                        },
-                                        "endpoint": {
-                                            "type": "string",
-                                            "example": "api/order-status/1"
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Token de acesso inválido."
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/ApiError"
                                 }
                             }
                         }
@@ -588,21 +476,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "code": {
-                                            "type": "string",
-                                            "example": "EXCPHAND001"
-                                        },
-                                        "endpoint": {
-                                            "type": "string",
-                                            "example": "api/order-status/1"
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Registro não encontrado."
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/ApiError"
                                 }
                             }
                         }
@@ -653,21 +527,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "code": {
-                                            "type": "string",
-                                            "example": "EXCPHAND001"
-                                        },
-                                        "endpoint": {
-                                            "type": "string",
-                                            "example": "api/order-status/1"
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Token de acesso inválido."
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/ApiError"
                                 }
                             }
                         }
@@ -677,21 +537,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "code": {
-                                            "type": "string",
-                                            "example": "EXCPHAND001"
-                                        },
-                                        "endpoint": {
-                                            "type": "string",
-                                            "example": "api/order-status/1"
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Registro não encontrado."
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/ApiError"
                                 }
                             }
                         }
@@ -702,6 +548,58 @@
                         "bearerAuth": []
                     }
                 ]
+            }
+        },
+        "/api/cep/{cep}": {
+            "get": {
+                "tags": [
+                    "Search CEP"
+                ],
+                "summary": "Get address by CEP",
+                "operationId": "fdea74b320e985d49572baaf52c262de",
+                "parameters": [
+                    {
+                        "name": "cep",
+                        "in": "path",
+                        "description": "CEP",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Address data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AddressDTO"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid CEP",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiError"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "External tool error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiError"
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
         "/api/user": {
@@ -774,21 +672,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "code": {
-                                            "type": "string",
-                                            "example": "EXCPHAND001"
-                                        },
-                                        "endpoint": {
-                                            "type": "string",
-                                            "example": "api/user"
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Token de acesso inválido."
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/ApiError"
                                 }
                             }
                         }
@@ -869,21 +753,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "code": {
-                                            "type": "string",
-                                            "example": "EXCPHAND001"
-                                        },
-                                        "endpoint": {
-                                            "type": "string",
-                                            "example": "api/user"
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Token de acesso inválido."
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/ApiError"
                                 }
                             }
                         }
@@ -964,21 +834,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "code": {
-                                            "type": "string",
-                                            "example": "EXCPHAND001"
-                                        },
-                                        "endpoint": {
-                                            "type": "string",
-                                            "example": "api/user"
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Token de acesso inválido."
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/ApiError"
                                 }
                             }
                         }
@@ -1038,21 +894,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "code": {
-                                            "type": "string",
-                                            "example": "EXCPHAND001"
-                                        },
-                                        "endpoint": {
-                                            "type": "string",
-                                            "example": "api/user/1"
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Token de acesso inválido."
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/ApiError"
                                 }
                             }
                         }
@@ -1062,21 +904,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "code": {
-                                            "type": "string",
-                                            "example": "EXCPHAND001"
-                                        },
-                                        "endpoint": {
-                                            "type": "string",
-                                            "example": "api/user/1"
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Registro não encontrado."
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/ApiError"
                                 }
                             }
                         }
@@ -1104,45 +932,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "properties": {
-                                            "ENDERECO_ID": {
-                                                "type": "integer",
-                                                "example": 1
-                                            },
-                                            "USUARIO_ID": {
-                                                "type": "integer",
-                                                "example": 1
-                                            },
-                                            "ENDERECO_NOME": {
-                                                "type": "string",
-                                                "example": "Casa"
-                                            },
-                                            "ENDERECO_LOGRADOURO": {
-                                                "type": "string",
-                                                "example": "Praça da Sé"
-                                            },
-                                            "ENDERECO_NUMERO": {
-                                                "type": "string",
-                                                "example": "2589"
-                                            },
-                                            "ENDERECO_COMPLEMENTO": {
-                                                "type": "string",
-                                                "example": "1º Andar, Apto 4"
-                                            },
-                                            "ENDERECO_CEP": {
-                                                "type": "string",
-                                                "example": "01001000"
-                                            },
-                                            "ENDERECO_CIDADE": {
-                                                "type": "string",
-                                                "example": "São Paulo"
-                                            },
-                                            "USUARIO_EENDERECO_ESTADOMAIL": {
-                                                "type": "string",
-                                                "example": "SP"
-                                            }
-                                        },
-                                        "type": "object"
+                                        "$ref": "#/components/schemas/Address"
                                     }
                                 }
                             }
@@ -1153,21 +943,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "code": {
-                                            "type": "string",
-                                            "example": "EXCPHAND001"
-                                        },
-                                        "endpoint": {
-                                            "type": "string",
-                                            "example": "api/user/adresses"
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Token de acesso inválido."
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/ApiError"
                                 }
                             }
                         }
@@ -1195,51 +971,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "properties": {
-                                            "PEDIDO_ID": {
-                                                "type": "integer",
-                                                "example": 1
-                                            },
-                                            "USUARIO_ID": {
-                                                "type": "integer",
-                                                "example": 1
-                                            },
-                                            "ENDERECO_ID": {
-                                                "type": "integer",
-                                                "example": 1
-                                            },
-                                            "STATUS_ID": {
-                                                "type": "integer",
-                                                "example": 1
-                                            },
-                                            "PEDIDO_DATA": {
-                                                "type": "string",
-                                                "format": "date-time",
-                                                "example": "2023-11-27T03:00:00.000000Z"
-                                            },
-                                            "status": {
-                                                "properties": {
-                                                    "STATUS_ID": {
-                                                        "type": "integer",
-                                                        "example": 1
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            "ENDERECO_CEP": {
-                                                "type": "string",
-                                                "example": "01001000"
-                                            },
-                                            "ENDERECO_CIDADE": {
-                                                "type": "string",
-                                                "example": "São Paulo"
-                                            },
-                                            "USUARIO_EENDERECO_ESTADOMAIL": {
-                                                "type": "string",
-                                                "example": "SP"
-                                            }
-                                        },
-                                        "type": "object"
+                                        "$ref": "#/components/schemas/OrderDTO"
                                     }
                                 }
                             }
@@ -1250,21 +982,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "code": {
-                                            "type": "string",
-                                            "example": "EXCPHAND001"
-                                        },
-                                        "endpoint": {
-                                            "type": "string",
-                                            "example": "api/user/orders"
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Token de acesso inválido."
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/ApiError"
                                 }
                             }
                         }
@@ -1318,6 +1036,135 @@
                     "message": {
                         "type": "string",
                         "example": "Ocorreu um erro."
+                    }
+                },
+                "type": "object"
+            },
+            "CartItemDTO": {
+                "properties": {
+                    "USUARIO_ID": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "PRODUTO_ID": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "ITEM_QTD": {
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "product": {
+                        "$ref": "#/components/schemas/ProductDTO"
+                    }
+                },
+                "type": "object"
+            },
+            "OrderDTO": {
+                "properties": {
+                    "PEDIDO_ID": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "USUARIO_ID": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "STATUS_ID": {
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "PEDIDO_DATA": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-11-27T03:00:00.000000Z"
+                    },
+                    "ENDERECO_ID": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/OrderStatus"
+                    }
+                },
+                "type": "object"
+            },
+            "OrderItemDTO": {
+                "properties": {
+                    "PEDIDO_ID": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "PRODUTO_ID": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "ITEM_PRECO": {
+                        "type": "number",
+                        "format": "float",
+                        "maximum": 999.99,
+                        "minimum": 0
+                    },
+                    "ITEM_QTD": {
+                        "type": "integer",
+                        "example": 20
+                    },
+                    "product": {
+                        "$ref": "#/components/schemas/ProductDTO"
+                    }
+                },
+                "type": "object"
+            },
+            "ProductDTO": {
+                "properties": {
+                    "PRODUTO_ID": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "PRODUTO_NOME": {
+                        "type": "string",
+                        "example": "Nome"
+                    },
+                    "PRODUTO_DESC": {
+                        "type": "string",
+                        "example": "Descrição do produto"
+                    },
+                    "PRODUTO_PRECO": {
+                        "type": "number",
+                        "format": "float",
+                        "maximum": 999.99,
+                        "minimum": 0,
+                        "example": 10
+                    },
+                    "PRODUTO_DESCONTO": {
+                        "type": "number",
+                        "format": "float",
+                        "maximum": 999.99,
+                        "minimum": 0,
+                        "example": 1
+                    },
+                    "PRODUTO_ATIVO": {
+                        "type": "integer",
+                        "maximum": 1,
+                        "minimum": 0,
+                        "example": 1
+                    },
+                    "CATEGORIA_ID": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "PRODUTO_QTD": {
+                        "type": "string",
+                        "example": "8"
+                    },
+                    "category": {
+                        "$ref": "#/components/schemas/Category"
+                    },
+                    "images": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ProductImage"
+                        }
                     }
                 },
                 "type": "object"

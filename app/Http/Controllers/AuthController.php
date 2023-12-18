@@ -75,12 +75,7 @@ class AuthController extends Controller
      *     @OA\Response(
      *          response="401", 
      *          description="Unauthorized",
-     *          @OA\JsonContent(
-     *              type="object",
-     *              @OA\Property(property="code", type="string", example="EXCPHAND001"),
-     *              @OA\Property(property="endpoint", type="string", example="api/me"),
-     *              @OA\Property(property="message", type="string", example="Token de acesso inválido.")
-     *         )
+     *          @OA\JsonContent(ref="#/components/schemas/ApiError")
      *     ),
      *     security={{"bearerAuth":{}}}
      * )
@@ -105,12 +100,7 @@ class AuthController extends Controller
      *     @OA\Response(
      *          response="401", 
      *          description="Unauthorized",
-     *          @OA\JsonContent(
-     *              type="object",
-     *              @OA\Property(property="code", type="string", example="EXCPHAND001"),
-     *              @OA\Property(property="endpoint", type="string", example="api/logout"),
-     *              @OA\Property(property="message", type="string", example="Token de acesso inválido.")
-     *         )
+     *          @OA\JsonContent(ref="#/components/schemas/ApiError")
      *     ),
      *     security={{"bearerAuth":{}}}
      * )
@@ -134,18 +124,12 @@ class AuthController extends Controller
      *             @OA\Property(property="access_token", type="string", example="access_token_123"),
      *             @OA\Property(property="token_type", type="string", example="bearer"),
      *             @OA\Property(property="expires_in", type="integer", example=3600)
-     *             
      *         )
      *     ),
      *     @OA\Response(
      *          response="401", 
      *          description="Unauthorized",
-     *          @OA\JsonContent(
-     *              type="object",
-     *              @OA\Property(property="code", type="string", example="EXCPHAND001"),
-     *              @OA\Property(property="endpoint", type="string", example="api/refresh-token"),
-     *              @OA\Property(property="message", type="string", example="Token de acesso inválido.")
-     *         )
+     *          @OA\JsonContent(ref="#/components/schemas/ApiError")
      *     ),
      *     security={{"bearerAuth":{}}}
      * )
