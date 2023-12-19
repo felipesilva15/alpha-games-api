@@ -25,13 +25,7 @@ class AuthController extends Controller
      *     @OA\Response(
      *          response="200", 
      *          description="Token details",
-     *          @OA\JsonContent(
-     *             type="object",
-     *             @OA\Property(property="access_token", type="string", example="access_token_123"),
-     *             @OA\Property(property="token_type", type="string", example="bearer"),
-     *             @OA\Property(property="expires_in", type="integer", example=3600)
-     *             
-     *         )
+     *          @OA\JsonContent(ref="#/components/schemas/AccessTokenDTO")
      *     ),
      *     @OA\Response(
      *          response="401", 
@@ -119,12 +113,7 @@ class AuthController extends Controller
      *     @OA\Response(
      *          response="200", 
      *          description="Token details",
-     *          @OA\JsonContent(
-     *             type="object",
-     *             @OA\Property(property="access_token", type="string", example="access_token_123"),
-     *             @OA\Property(property="token_type", type="string", example="bearer"),
-     *             @OA\Property(property="expires_in", type="integer", example=3600)
-     *         )
+     *          @OA\JsonContent(ref="#/components/schemas/AccessTokenDTO")
      *     ),
      *     @OA\Response(
      *          response="401", 
