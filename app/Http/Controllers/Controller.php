@@ -56,6 +56,16 @@ class Controller extends BaseController
         return response()->json($data, 200);
     }
 
+    public function show($id) {
+        $data = $this->model::find($id);
+
+        if (!$data) {
+            throw new MasterNotFoundHttpException;
+        }
+        
+        return response()->json($data, 200);
+    }
+
     public function store(Request $request) {
         if (method_exists($this->model, 'rules')){
             $request->validate($this->model::rules());
