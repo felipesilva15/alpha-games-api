@@ -72,19 +72,10 @@ Essas instruções permitirão que você obtenha uma cópia do projeto em opera�
   DB_PASSWORD=
 ```
 
-6. Gere a chave secret para a autenticação com token JWT no campo abaixo do arquivo .env
+6. Gere a chave secret para a autenticação com token JWT com o comando abaixo
 
 ```bash
   php artisan jwt:secret
-```
-
-```bash
-  DB_CONNECTION=mysql
-  DB_HOST=127.0.0.1
-  DB_PORT=3306
-  DB_DATABASE=laravel
-  DB_USERNAME=root
-  DB_PASSWORD=
 ```
 
 7. Gere a chave da aplicação  
