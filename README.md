@@ -1,66 +1,108 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+<h1 align="center">
+  <img alt="Alpha Games" width="300px" src="https://github.com/felipesilva15/alpha-games-app/blob/main/app/src/main/res/drawable/logo.png" />
+  <br>
+  Alpha Games
+</h1>
 
-## About Laravel
+<div align="center">
+   <img src="http://img.shields.io/static/v1?label=STATUS&message=FINALIZADO&color=RED&style=for-the-badge" alt="badge-desenvolvimento"/>
+</div>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<div align="center">
+  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/felipesilva15/alpha-games-api.svg">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/felipesilva15/alpha-games-api.svg">
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/felipesilva15/alpha-games-api.svg">
+  <a href="https://github.com/felipesilva15/alpha-games-api/commits/main">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/felipesilva15/alpha-games-api.svg">
+  </a>
+  <a href="https://github.com/felipesilva15/alpha-games-api/issues">
+    <img alt="Repository issues" src="https://img.shields.io/github/issues/felipesilva15/alpha-games-api.svg">
+  </a>
+  <img alt="GitHub" src="https://img.shields.io/github/license/felipesilva15/alpha-games-api.svg">
+</div>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 📝 Descrição do projeto
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Esta é uma API com o objetivo de fornecer funcionalidades do back-end para um e-commerce fictício de venda de jogos, chamado Alpha Games.
 
-## Learning Laravel
+## 🚀 Rodando localmente
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Essas instruções permitirão que você obtenha uma cópia do projeto em operação na sua máquina local para fins de desenvolvimento e teste.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### 📋 Pré-requisitos
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+* PHP v8.2.0+
+* Composer
 
-## Laravel Sponsors
+### 🔧 Instalação
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+1. Clone o projeto utilizando o comando abaixo
 
-### Premium Partners
+``` bash
+  git clone https://github.com/felipesilva15/alpha-games-api.git
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+2. Acesse a pasta dos fonts deste projeto
 
-## Contributing
+```bash
+  cd alpha-games-api
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+3. Instale as dependências do projeto
 
-## Code of Conduct
+```bash
+  composer install
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+4. Copie o arquivo de exemplo de variáveis de ambiente  
 
-## Security Vulnerabilities
+```bash
+  cp .env.example .env
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+5. Atualize as credenciais de acesso ao seu banco de dados preenchendo os campos abaixo
 
-## License
+```bash
+  DB_CONNECTION=mysql
+  DB_HOST=127.0.0.1
+  DB_PORT=3306
+  DB_DATABASE=laravel
+  DB_USERNAME=root
+  DB_PASSWORD=
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+6. Gere a chave secret para a autenticação com token JWT com o comando abaixo
+
+```bash
+  php artisan jwt:secret
+```
+
+7. Gere a chave da aplicação  
+
+```bash
+  php artisan key:generate
+```
+
+8. Inicie a aplicação
+
+```bash
+  php artisan serve
+```
+
+7. Acesse a [documentação da API no Swagger](http://localhost:8000/api/documentation) e realize seus testes.
+
+## 🛠️ Construído com
+
+* [Laravel (PHP)](https://laravel.com/) - Framework de PHP para o Back-end
+
+## ✒️ Autores
+
+* **Felipe Silva** - *Desenvolvedor* - [felipesilva15](https://github.com/felipesilva15)
+
+## 📄 Licença
+
+Este projeto está sob a licença (MIT) - veja o arquivo [LICENSE](https://github.com/felipesilva15/alpha-games-api/blob/main/LICENCE) para detalhes.
+
+---
+Documentado por [Felipe Silva](https://github.com/felipesilva15) 😊
