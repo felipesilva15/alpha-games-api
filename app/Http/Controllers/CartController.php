@@ -11,6 +11,42 @@ use Illuminate\Routing\Controller as BaseController;
 
 class CartController extends BaseController
 {
+    /**
+     * @OA\Post(
+     *      path="/api/cart/{productId}",
+     *      tags={"Cart"},
+     *      summary="Update an item from cart",
+     *      @OA\Parameter(
+     *          name="productId",
+     *          in="path",
+     *          required=true,
+     *          description="Product ID",
+     *          @OA\Schema(type="integer")
+     *      ),
+     *      @OA\RequestBody(
+     *          required=true,
+     *          description="Data for creating a new cart item",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(property="ITEM_QTD", type="integer", example=1)
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response="200", 
+     *          description="Return message",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(property="message", type="string", example="Carrinho atualizado!")
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response="401", 
+     *          description="Unauthorized",
+     *          @OA\JsonContent(ref="#/components/schemas/ApiError")
+     *      ),
+     *      security={{"bearerAuth":{}}}
+     * )
+     */
     public function store(Product $product, Request $request){
         $qtyItem = $request->ITEM_QTD ? $request->ITEM_QTD : 0;
         
@@ -46,6 +82,34 @@ class CartController extends BaseController
         return response()->json(['message' => 'Carrinho atualizado!'], 200);
     }
 
+    /**
+     * @OA\Delete(
+     *      path="/api/cart/{productId}",
+     *      tags={"Cart"},
+     *      summary="Remove an item from cart",
+     *      @OA\Parameter(
+     *          name="productId",
+     *          in="path",
+     *          required=true,
+     *          description="Product ID",
+     *          @OA\Schema(type="integer")
+     *      ),
+     *      @OA\Response(
+     *          response="200", 
+     *          description="Return message",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(property="message", type="string", example="Item removido do carrinho.")
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response="401", 
+     *          description="Unauthorized",
+     *          @OA\JsonContent(ref="#/components/schemas/ApiError")
+     *      ),
+     *      security={{"bearerAuth":{}}}
+     * )
+     */
     public function destroy(Product $product){
         $cartItem = CartItem::where([
             ['PRODUTO_ID', $product->PRODUTO_ID],
