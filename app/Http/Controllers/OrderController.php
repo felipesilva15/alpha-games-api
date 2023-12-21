@@ -18,6 +18,41 @@ class OrderController extends Controller
         $this->request = $request;
     }
 
+    /**
+     * @OA\Get(
+     *      path="/api/order/{id}",
+     *      tags={"Order"},
+     *      summary="List an order by ID",
+     *      @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          required=true,
+     *          description="Order ID",
+     *          @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *          response="200", 
+     *          description="Detailed order data",
+     *          @OA\JsonContent(ref="#/components/schemas/DetailedOrderDTO")
+     *     ),
+     *     @OA\Response(
+     *          response="401", 
+     *          description="Unauthorized",
+     *          @OA\JsonContent(ref="#/components/schemas/ApiError")
+     *     ),
+     *     @OA\Response(
+     *          response="404", 
+     *          description="Record not found",
+     *          @OA\JsonContent(ref="#/components/schemas/ApiError")
+     *     ),
+     *     @OA\Response(
+     *          response="403", 
+     *          description="Forbidden",
+     *          @OA\JsonContent(ref="#/components/schemas/ApiError")
+     *     ),
+     *     security={{"bearerAuth":{}}}
+     * )
+     */
     public function show($order){
         $data = Order::with('status', 'address', 'items', 'items.product', 'items.product.category', 'items.product.images')
                         ->find($order);
@@ -33,6 +68,34 @@ class OrderController extends Controller
         return response()->json($data, 200);
     }
 
+    /**
+     * @OA\Post(
+     *      path="/api/order",
+     *      tags={"Order"},
+     *      summary="Registers an order",
+     *      @OA\RequestBody(
+     *          required=true,
+     *          description="Data for creating a new order",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(property="PEDIDO_DATA", type="string", format="date-time", example="2023-11-27T03:00:00.000000Z"),
+     *              @OA\Property(property="ENDERECO_ID", type="integer", example=1),
+     *              @OA\Property(property="STATUS_ID", type="integer", example=1)
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response="201", 
+     *          description="Registered order data",
+     *          @OA\JsonContent(ref="#/components/schemas/Order")
+     *      ),
+     *      @OA\Response(
+     *          response="401", 
+     *          description="Unauthorized",
+     *          @OA\JsonContent(ref="#/components/schemas/ApiError")
+     *      ),
+     *      security={{"bearerAuth":{}}}
+     * )
+     */
     public function store(Request $request){
         $request->validate(Order::rules());
 
