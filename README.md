@@ -26,6 +26,8 @@
 
 Esta é uma API com o objetivo de fornecer funcionalidades do back-end para um e-commerce fictício de venda de jogos, chamado Alpha Games.
 
+Este projeto foi implantado em uma VPS na [Hostinger](https://www.hostinger.com.br/), e está disponível através do link <https://alpha-games-api.felipesilva15.com.br/api/documentation>
+
 ## 🚀 Rodando localmente
 
 Essas instruções permitirão que você obtenha uma cópia do projeto em operação na sua máquina local para fins de desenvolvimento e teste.
