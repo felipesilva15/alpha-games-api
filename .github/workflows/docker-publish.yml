@@ -28,7 +28,14 @@ jobs:
 
       - name: Docker build
         working-directory: .
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/$(basename ${{ github.repository }}):latest .
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/$(basename ${{ github.repository }}):latest \
+            --build-arg DB_HOST='${{ secrets.DB_HOST }}' \
+            --build-arg DB_PORT='${{ secrets.DB_PORT }}' \
+            --build-arg DB_DATABASE='${{ secrets.DB_DATABASE }}' \
+            --build-arg DB_USERNAME='${{ secrets.DB_USERNAME }}' \
+            --build-arg DB_PASSWORD='${{ secrets.DB_PASSWORD }}' \
+            .
 
       - name: Push to Docker Hub
         run: |
