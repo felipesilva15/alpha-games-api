@@ -23,14 +23,8 @@ class Product extends Model
 
     protected $table = "PRODUTO";
     protected $primaryKey = 'PRODUTO_ID';
-    protected $fillable = [
-        "PRODUTO_NOME",
-        "PRODUTO_DESC",
-        "PRODUTO_PRECO",
-        "PRODUTO_DESCONTO",
-        "PRODUTO_ATIVO",
-        "CATEGORIA_ID"
-    ];
+    protected $fillable = ["PRODUTO_NOME", "PRODUTO_DESC", "PRODUTO_PRECO", "PRODUTO_DESCONTO", "PRODUTO_ATIVO", "CATEGORIA_ID"];
+    public $timestamps = false;
 
     public function images() {
         return $this->hasMany('App\Models\ProductImage', 'PRODUTO_ID', 'PRODUTO_ID');
